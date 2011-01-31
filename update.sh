@@ -96,6 +96,9 @@ get_repo "ervandew" "supertab"
 echo "Installing jslint"
 get_repo "hallettj" "jslint.vim"
 
+echo "Installing xmledit"
+get_repo "sukima" "xmledit"
+
 echo "Installing gundo"
 get_repo "sjl" "gundo.vim"
 

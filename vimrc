@@ -371,7 +371,6 @@ au FileType html,xhtml set formatoptions+=tl
 au FileType html,xhtml set foldmethod=indent smartindent
 au FileType html,xhtml set noexpandtab tabstop=3 shiftwidth=3
 au BufWritePost,FileWritePost *.html call JavaScriptLint()
-au FileType html,xhtml,xml so ~/.vim/ftplugin/html_autoclosetag.vim
 " Expand compressed HTML with Tidy
 map <leader>td :%!tidy -q -config ~/.vim/tidy.conf --tidy-mark 0 2>/dev/null<CR><ESC>gg=G
 " Load the current buffer in Default Web Browser or Firefox
