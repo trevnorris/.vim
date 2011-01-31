@@ -25,4 +25,3 @@ fi
 
 cd $HOME
 ln -s .vim/vimrc .vimrc               || fail ".vimrc"
-ln -s .vim/gvimrc .gvimrc             || fail ".gvimrc"

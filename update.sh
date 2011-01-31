@@ -53,7 +53,7 @@ cd $DOTVIM/bundle/
 tpope_repos=(git surround unimpaired abolish repeat markdown ragtag fugitive)
 
 for r in ${tpope_repos[*]}; do
-	repo="vim-$r"
+    repo="vim-$r"
     get_repo "tpope" $repo
 done
 
@@ -93,6 +93,15 @@ get_repo "digitaltoad" "vim-jade"
 echo "Installing supertab"
 get_repo "ervandew" "supertab"
 
+echo "Installing jslint"
+get_repo "hallettj" "jslint.vim"
+
+echo "Installing gundo"
+get_repo "sjl" "gundo.vim"
+
+echo "Installing YankRing.vim"
+get_repo "vim-scripts" "YankRing.vim"
+
 echo "Installing align"
 get_repo "tsaleh" "vim-align"
 
@@ -110,6 +119,9 @@ get_repo "vim-scripts" "mru.vim"
 
 echo "Installing vim-indent-object"
 get_repo "michaeljsmith" "vim-indent-object"
+
+echo "Installing neocomplcache"
+get_repo "Shougo" "neocomplcache"
 
 echo "Installing coffee-script"
 get_repo "kchmck" "vim-coffee-script"
@@ -146,8 +158,8 @@ contains=`grep "$pathogen_cmd" ~/.vimrc | wc -l`
 
 if [ $contains == 0 ]
 then
-	echo "Hasn't been added, adding now."
-	echo "$pathogen_cmd" >> ~/.vimrc
+    echo "Hasn't been added, adding now."
+    echo "$pathogen_cmd" >> ~/.vimrc
 else
-	echo "It was already added. Good to go"
+    echo "It was already added. Good to go"
 fi
