@@ -105,14 +105,8 @@ get_repo "vim-scripts" "YankRing.vim"
 echo "Installing align"
 get_repo "tsaleh" "vim-align"
 
-echo "Installing delimitMate"
-get_repo "Raimondi" "delimitMate"
-
 echo "Installing vimorganizer"
 get_repo "hsitz" "VimOrganizer"
-
-echo "Installing ZoomWin"
-get_repo "vim-scripts" "ZoomWin"
 
 echo "Installing mru,vim"
 get_repo "vim-scripts" "mru.vim"
@@ -134,9 +128,6 @@ get_repo "nanotech" "jellybeans.vim"
 
 echo "Installing jellyx.vim"
 get_repo "guns" "jellyx.vim"
-
-echo "Installing neverland"
-get_repo "trapd00r" "neverland-vim-theme"
 
 echo "Installing perfect"
 get_repo "kossnocorp" "perfect.vim"
