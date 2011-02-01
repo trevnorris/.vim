@@ -1,6 +1,7 @@
 set nocompatible " use full Vim
 
 " PATHOGEN
+filetype off
 silent! call pathogen#runtime_append_all_bundles()
 silent! call pathogen#helptags()
 
@@ -100,6 +101,8 @@ nmap <leader>w :up<cr>
 imap jj <ESC>
 " fast editing of the .vimrc
 map <leader>ev :e $MYVIMRC<cr>
+" prevent accidental striking of F1 key
+map <F1> <ESC>
 " clear highlight
 nnoremap <leader><space> :noh<cr>
 " display hidden non printable characters
@@ -107,7 +110,7 @@ nmap <leader>l :set list!<CR>
 " re hardwrap text
 nnoremap <leader>q gqip
 " map Y to match C and D
-nmap Y y$
+nnoremap Y y$
 " yank entire file (global yank)
 nmap gy ggVGy
 " allow saving when you forgot sudo
@@ -118,31 +121,16 @@ nnoremap k gk
 " move around matching bracket pairs
 nnoremap <tab> %
 vnoremap <tab> %
-" set tabwidth on fly
-map <leader>t2 :setlocal shiftwidth=2<cr>
-map <leader>t4 :setlocal shiftwidth=4<cr>
-map <leader>t8 :setlocal shiftwidth=4<cr>
 " auto complete {} indent and position the cursor in the middle line
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
-inoremap (      ()<Left>
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap ((     (
-inoremap ()     ()
-inoremap [      []<Left>
-inoremap [<CR>  [<CR>]<Esc>O
-inoremap [[     [
-inoremap []     []
+ inoremap {<CR>  {<CR>}<Esc>O
+ inoremap (<CR>  (<CR>)<Esc>O
+ inoremap [<CR>  [<CR>]<Esc>O
 " fast window switching
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 map <leader>, <C-W>w
-" close all the buffers
-map <leader>ba :1,300 bd!<cr>
 " cycle between buffers
 map <right> :bn<cr>
 map <left> :bp<cr>
@@ -158,7 +146,7 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 vmap > >gv
 vmap < <gv
 " strip all trailing whitespace in the current file
-nnoremap <leader>nw :%s/\s\+$//e<cr>:let @/=''<CR>
+nnoremap <leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
 " turn on spell checking
 map <leader>spl :setlocal spell!<cr>
 " spell checking shortcuts
@@ -210,10 +198,10 @@ iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eius
 " NERDTree
 let NERDTreeIgnore=['\~$'] " ignore files ending in ~
 map <leader>n :NERDTreeToggle<cr>
-" autocmd VimEnter * NERDTree
-autocmd VimEnter * wincmd p
-autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-" disable netrw's autocmd, since we're ALWAYS using NERDTree
+
+" au VimEnter * NERDTree
+" au VimEnter * wincmd p
+au VimEnter * call s:CdIfDirectory(expand("<amatch>"))
 runtime plugin/netRwPlugin.vim
 augroup FileExplorer
   au!
@@ -225,6 +213,7 @@ function s:CdIfDirectory(directory)
     call ChangeDirectory(a:directory)
   endif
 endfunction
+
 " NERDTree utility function
 function s:UpdateNERDTree(stay)
   if exists("t:NERDTreeBufName")
@@ -236,6 +225,7 @@ function s:UpdateNERDTree(stay)
     endif
   endif
 endfunction
+
 " utility functions to create file commands
 function s:CommandCabbr(abbreviation, expansion)
   execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
@@ -319,7 +309,7 @@ nmap <Leader>lint :Errors<CR><C-W>j
 
 " JSlint
 if has("gui_running")
-    let g:JSLintHighlightErrorLine = 1
+    let g:JSLintHighlightErrorLine = 0 " kinda annoying
 else
     let g:JSLintHighlightErrorLine = 0
 endif
@@ -370,7 +360,6 @@ au FileType html,xhtml set formatoptions+=tl
 " folding
 au FileType html,xhtml set foldmethod=indent smartindent
 au FileType html,xhtml set noexpandtab tabstop=3 shiftwidth=3
-au BufWritePost,FileWritePost *.html call JavaScriptLint()
 " Expand compressed HTML with Tidy
 map <leader>td :%!tidy -q -config ~/.vim/tidy.conf --tidy-mark 0 2>/dev/null<CR><ESC>gg=G
 " Load the current buffer in Default Web Browser or Firefox
@@ -456,11 +445,6 @@ set statusline+=[%{FileSize()}]\
 " display current git branch
 set statusline+=%{fugitive#statusline()}\
 
-" display a warning if &et is wrong, or we have mixed-indenting
-set statusline+=%#error#
-set statusline+=%{StatuslineTabWarning()}
-set statusline+=%*
-
 set statusline+=%{StatuslineTrailingSpaceWarning()}
 
 " display a warning with Syntastic, of validation errors and syntax checkers
@@ -530,25 +514,6 @@ function! StatuslineTrailingSpaceWarning()
         endif
     endif
     return b:statusline_trailing_space_warning
-endfunction
-
-" return '[&et]' if &et is set wrong
-" return '[mixed-indenting]' if spaces and tabs are used to indent
-" return an empty string if everything is fine
-function! StatuslineTabWarning()
-    if !exists("b:statusline_tab_warning")
-        let tabs = search('^\t', 'nw') != 0
-        let spaces = search('^ ', 'nw') != 0
-
-        if tabs && spaces
-            let b:statusline_tab_warning =  '[mixed-indenting]'
-        elseif (spaces && !&et) || (tabs && &et)
-            let b:statusline_tab_warning = '[&et]'
-        else
-            let b:statusline_tab_warning = ''
-        endif
-    endif
-    return b:statusline_tab_warning
 endfunction
 
 " return a warning for "long lines" where "long" is either &textwidth or 80 (if

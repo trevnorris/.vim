@@ -90,6 +90,9 @@ get_repo "pangloss" "vim-javascript"
 echo "Installing vim-jade"
 get_repo "digitaltoad" "vim-jade"
 
+echo "Installing vim-autoclose"
+get_repo "Townk" "vim-autoclose"
+
 echo "Installing supertab"
 get_repo "ervandew" "supertab"
 
@@ -110,9 +113,6 @@ get_repo "tsaleh" "vim-align"
 
 echo "Installing vimorganizer"
 get_repo "hsitz" "VimOrganizer"
-
-echo "Installing mru,vim"
-get_repo "vim-scripts" "mru.vim"
 
 echo "Installing vim-indent-object"
 get_repo "michaeljsmith" "vim-indent-object"
