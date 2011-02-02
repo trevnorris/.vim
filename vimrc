@@ -18,7 +18,6 @@ set history=500 " sets how many lines of history VIM has to remember
 set scrolloff=3 " show 3 lines of context around the cursor
 set autoread " set to auto read when a file is changed from the outside
 set visualbell " Use visual bell
-set autochdir " automatically use the current file's directory as the working directory
 set foldenable " enable code folding
 set mousehide " hide mouse cursor when typing
 set mouse=a " allow for full mouse support
@@ -359,8 +358,8 @@ au FileType html,xhtml set formatoptions+=tl
 " folding
 au FileType html,xhtml set foldmethod=indent smartindent
 au FileType html,xhtml set noexpandtab tabstop=3 shiftwidth=3
-" Expand compressed HTML with Tidy
-map <leader>td :%!tidy -q -config ~/.vim/tidy.conf --tidy-mark 0 2>/dev/null<CR><ESC>gg=G
+au FileType xhtml,xml so $HOME/.vim/ftplugin/html_autoclosetag.vim
+
 " Load the current buffer in Default Web Browser or Firefox
 au Filetype html,xhtml nmap <leader>pv : call PreviewInBrowser()<CR>
 func! PreviewInBrowser()
@@ -501,8 +500,6 @@ function! StatuslineCurrentHighlight()
         return '[' . name . ']'
     endif
 endfunction
-
-autocmd cursorhold,bufwritepost * unlet! b:statusline_trailing_space_warning
 
 function! StatuslineTrailingSpaceWarning()
     if !exists("b:statusline_trailing_space_warning")

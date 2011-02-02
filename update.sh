@@ -87,6 +87,9 @@ get_repo "mileszs" "ack.vim"
 echo "Installing javascript.vim"
 get_repo "pangloss" "vim-javascript"
 
+echo "Installing haskell.vim"
+get_repo "vim-scripts" "syntaxhaskell.vim"
+
 echo "Installing vim-jade"
 get_repo "digitaltoad" "vim-jade"
 
