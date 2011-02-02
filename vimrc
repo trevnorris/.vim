@@ -304,8 +304,7 @@ let coffee_compile_on_save = 1
 
 " Syntastic
 nmap <Leader>lint :Errors<CR><C-W>j
-"let g:syntastic_enable_signs=1
-"let g:syntastic_quiet_warnings=1
+let g:syntastic_quiet_warnings=1
 
 " JSlint
 if has("gui_running")
@@ -399,7 +398,7 @@ func! MarkdownPreview()
 endfunc
 
 " JavaScript
-au FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+au FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
 au FileType javascript call JavaScriptFold()
 au FileType javascript setl fen
 au FileType javascript setl nocindent
