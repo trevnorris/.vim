@@ -1,7 +1,6 @@
 .netrwhist
-tmp
-.VimballRecord
-*.swp
+.tmp
+.swp
+.undo
 bundle
-undodir
 spell

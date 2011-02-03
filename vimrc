@@ -1,62 +1,63 @@
-set nocompatible " use full Vim
+" FULL VIM
+set nocompatible
 
 " PATHOGEN
 filetype off
 silent! call pathogen#runtime_append_all_bundles()
 silent! call pathogen#helptags()
+filetype plugin indent on
 
-" COLOR SCHEME
-colorscheme jellybeans
-if has("gui_running")
-    colorscheme jellyx
-endif
+" MAP LEADER
+let mapleader = ","
 
 " CONFIGURATION MAPPING
+set showmode                                   " display the mode you're in
+set history=500                                " sets how many lines of history VIM has to remember
+set undolevels=500
+set scrolloff=3                                " show 3 lines of context around the cursor
+set autoread                                   " set to auto read when a file is changed from the outside
+set visualbell                                 " Use visual bell
+set mousehide                                  " hide mouse cursor when typing
+set mouse=a                                    " allow for full mouse support
+set autowriteall                               " write all buffers when switching
+set number                                     " show line numbers
+set showcmd                                    " show typed commands
 
-set showmode " display the mode you're in
-set history=500 " sets how many lines of history VIM has to remember
-set scrolloff=3 " show 3 lines of context around the cursor
-set autoread " set to auto read when a file is changed from the outside
-set visualbell " Use visual bell
-set foldenable " enable code folding
-set mousehide " hide mouse cursor when typing
-set mouse=a " allow for full mouse support
-set autowriteall " write all buffers when switching
-set undolevels=999
-set number " show line numbers
-set showcmd " show typed commands
-
-set wildmenu " turn on WiLd menu
-set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
+set wildmenu                                   " turn on WiLd menu
+set wildmode=list:longest,list:full            " activate TAB auto-completion for file paths
 set wildignore+=*.o,.git
 
-set ruler " always show current position
-set cmdheight=1 " the commandbar height
-set backspace=indent,eol,start " set backspace config, backspace as normal
+set ruler                                      " always show current position
+set cmdheight=1                                " the commandbar height
+set backspace=indent,eol,start                 " set backspace config, backspace as normal
 set whichwrap+=<,>,h
-set title " set the terminal title
-set ignorecase " ignore case when searching
+set nomodeline "security
+set title                                      " set the terminal title
+set termencoding=utf8
 set encoding=utf8
-set smartcase " but case-sensitive if expression contains a capital letter.
-set hlsearch " highlight search things
-set incsearch " go to search results as typing
-set magic "set magic on, for regular expressions
-set showmatch " show matching brackets when text indicator is over them
-set mat=2 " how many tenths of a second to blink
-set lazyredraw " don't redraw screen during macros
-set ttyfast " improves redrawing for newer computers
-set fileformats=unix,mac,dos
-set spelllang=en,es " set spell check language
 
-set nobackup " prevent backups of files, since using versioning mostly
+set hlsearch                                   " highlight search things
+set incsearch                                  " go to search results as typing
+set smartcase                                  " but case-sensitive if expression contains a capital letter.
+set ignorecase                                 " ignore case when searching
+set gdefault "assume global when searching or substituting
+set magic                                      " set magic on, for regular expressions
+set showmatch                                  " show matching brackets when text indicator is over them
+
+set mat=2                                      " how many tenths of a second to blink
+set lazyredraw                                 " don't redraw screen during macros
+set ttyfast                                    " improves redrawing for newer computers
+set fileformats=unix,mac,dos
+set spelllang=en,es                            " set spell check language
+
+set nobackup                                   " prevent backups of files, since using versioning mostly and undofile
 set nowritebackup
 set noswapfile
-set directory=~/.vim/swapfiles,/var/tmp,/tmp,. " swap directory
-
+set directory=~/.vim/.swp,/tmp " swap directory
 if v:version >= 703
     " undo - set up persistent undo
     set undofile
-    set undodir=$HOME/.vim/undodir
+    set undodir=$HOME/.vim/.undo
 endif
 
 set shiftwidth=4 " set tab width
@@ -64,42 +65,78 @@ set softtabstop=4
 set tabstop=4
 set smarttab
 set expandtab
-
 set autoindent " set automatic code indentation
-set cindent
-set smartindent
+set copyindent
 
-set linebreak " this will not break whole words while wrap is enabled
 set wrap " wrap lines
-set formatprg=par
-set foldcolumn=2 " fold column width
+set linebreak " this will not break whole words while wrap is enabled
 set showbreak=…
 
-set viminfo='1000,f1,:1000,/1000
+" COLOR SCHEME
+set term=xterm-256color " allow for more color
+if &t_Co >= 256 || has("gui_running")
+    colorscheme jellybeans
+endif
+
+" FOLDING
+set foldenable " enable folding
+set foldcolumn=2 " add a fold column
+set foldmethod=marker " detect triple-{ style fold markers
+set foldlevelstart=0 " start out with everything folded
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+                                " which commands trigger auto-unfold
+function! MyFoldText()
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart(' ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 4
+    return line . ' …' . repeat(" ",fillcharcount) . foldedlinecount . ' '
+endfunction
+set foldtext=MyFoldText()
+
+set viminfo='20,\"80
 set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trailing tab
 set tags+=../tags,../../tags,../../../tags,../../../../tags " look for all the tags files in the recurrent directories
 
 set shell=/bin/zsh " set internal shell
 set cursorline " highlight current line
 set colorcolumn=115 " show a right margin column
-set term=xterm-256color " allow for more color
-set t_Co=256
 set background=dark
 
-filetype plugin indent on " enable file plugin
 syntax enable " enable syntax highlighting
 
-let mapleader = ","
-let g:mapleader = ","
+" ADDITIONAL KEY MAPPINGS
 
-"" ADDITIONAL KEY MAPPINGS
+" tame the quickfix window (open/close using ,f)
+nmap <silent> <leader>f :QFix<CR>
 
+command! -bang -nargs=? QFix call QFixToggle(<bang>0)
+function! QFixToggle(forced)
+  if exists("g:qfix_win") && a:forced == 0
+    cclose
+    unlet g:qfix_win
+  else
+    copen 10
+    let g:qfix_win = bufnr("$")
+  endif
+endfunction
+
+" fast commands
+map ; :
 " fast saving
 nmap <leader>w :up<cr>
 " fast escaping
 imap jj <ESC>
-" fast editing of the .vimrc
-map <leader>ev :e $MYVIMRC<cr>
+" fast quiting
+imap <leader>q :q<cr>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
 " clear highlight
@@ -108,12 +145,17 @@ nnoremap <leader><space> :noh<cr>
 nmap <leader>l :set list!<CR>
 " re hardwrap text
 nnoremap <leader>q gqip
-" map Y to match C and D
-nnoremap Y y$
+" space to toggle folds
+nnoremap <space> za
+" map Y to match C and D behavior
+nmap Y y$
+" yank/paste to the OS clipboard with ,y and ,p
+nmap <leader>y "+y
+nmap <leader>Y "+yy
+nmap <leader>p "+p
+nmap <leader>P "+P
 " yank entire file (global yank)
 nmap gy ggVGy
-" allow saving when you forgot sudo
-cmap w!! w !sudo tee % >/dev/null
 " ignore lines when going up or down
 nnoremap j gj
 nnoremap k gk
@@ -121,9 +163,9 @@ nnoremap k gk
 nnoremap <tab> %
 vnoremap <tab> %
 " auto complete {} indent and position the cursor in the middle line
- inoremap {<CR>  {<CR>}<Esc>O
- inoremap (<CR>  (<CR>)<Esc>O
- inoremap [<CR>  [<CR>]<Esc>O
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap (<CR>  (<CR>)<Esc>O
+inoremap [<CR>  [<CR>]<Esc>O
 " fast window switching
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -136,32 +178,41 @@ map <left> :bp<cr>
 map <leader>b :b#<cr>
 " change directory to current buffer
 map <leader>cd :cd %:p:h<cr>
+" swap implementations of ` and ' jump to prefer row and column jumping
+nnoremap ' `
+nnoremap ` '
 " move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
+nmap <M-j> mz:m+<cr>`j
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " indent visual selected code without unselecting and going back to normal mode
 vmap > >gv
 vmap < <gv
+" Pull word under cursor into LHS of a substitute (for quick search and replace)
+nmap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
 " turn on spell checking
-map <leader>spl :setlocal spell!<cr>
-" spell checking shortcuts
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
+map <leader>spell :setlocal spell!<cr>
+
+" fast editing of the .vimrc
+nmap <silent> <leader>ev :e $MYVIMRC<cr>
+nmap <silent> <leader>sv :so $MYVIMRC<cr>
+" allow saving when you forgot sudo
+cmap w!! w !sudo tee % >/dev/null
 
 "" ADDITIONAL AUTOCOMMANDS
 
-" when vimrc is edited, reload it
-autocmd bufwritepost .vimrc source $MYVIMRC
 " saving when focus lost (after tabbing away or switching buffers)
 au FocusLost * :up
 " open in last edit place
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+
+"" CONFLICT MARKERS
+
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+nmap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<cr>
 
 "" ADDITIONAL GUI SETTINGS
 
@@ -191,111 +242,37 @@ iab #! #!/bin/sh
 " lorem ipsum text
 iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+" common abbrev., mispellings
+source $HOME/.vim/autocorrect.vim
 
 "" PLUGIN SETTINGS
 
+" YankRing
+let g:yankring_history_dir = '$HOME/.vim/.tmp'
+nmap <leader>r :YRShow<CR>
+
 " NERDTree
-let NERDTreeIgnore=['\~$'] " ignore files ending in ~
-map <leader>n :NERDTreeToggle<cr>
-
-" au VimEnter * NERDTree
-" au VimEnter * wincmd p
-au VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-runtime plugin/netRwPlugin.vim
-augroup FileExplorer
-  au!
-augroup END
-let g:NERDTreeHijackNetrw = 0
-" if the parameter is a directory, cd into it
-function s:CdIfDirectory(directory)
-  if isdirectory(a:directory)
-    call ChangeDirectory(a:directory)
-  endif
-endfunction
-
-" NERDTree utility function
-function s:UpdateNERDTree(stay)
-  if exists("t:NERDTreeBufName")
-    if bufwinnr(t:NERDTreeBufName) != -1
-      NERDTree
-      if !a:stay
-        wincmd p
-      end
-    endif
-  endif
-endfunction
-
-" utility functions to create file commands
-function s:CommandCabbr(abbreviation, expansion)
-  execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
-endfunction
-function s:FileCommand(name, ...)
-  if exists("a:1")
-    let funcname = a:1
-  else
-    let funcname = a:name
-  endif
-  execute 'command -nargs=1 -complete=file ' . a:name . ' :call ' . funcname . '(<f-args>)'
-endfunction
-
-function s:DefineCommand(name, destination)
-  call s:FileCommand(a:destination)
-  call s:CommandCabbr(a:name, a:destination)
-endfunction
-
-" public NERDTree-aware versions of builtin functions
-function ChangeDirectory(dir, ...)
-  execute "cd " . a:dir
-  let stay = exists("a:1") ? a:1 : 1
-  call s:UpdateNERDTree(stay)
-endfunction
-
-function Touch(file)
-  execute "!touch " . a:file
-  call s:UpdateNERDTree(1)
-endfunction
-
-function Remove(file)
-  let current_path = expand("%")
-  let removed_path = fnamemodify(a:file, ":p")
-
-  if (current_path == removed_path) && (getbufvar("%", "&modified"))
-    echo "You are trying to remove the file you are editing. Please close the buffer first."
-  else
-    execute "!rm " . a:file
-  endif
-endfunction
-
-function Edit(file)
-  if exists("b:NERDTreeRoot")
-    wincmd p
-  endif
-
-  execute "e " . a:file
-
-ruby << RUBY
-  destination = File.expand_path(VIM.evaluate(%{system("dirname " . a:file)}))
-  pwd         = File.expand_path(Dir.pwd)
-  home        = pwd == File.expand_path("~")
-
-  if home || Regexp.new("^" + Regexp.escape(pwd)) !~ destination
-    VIM.command(%{call ChangeDirectory(system("dirname " . a:file), 0)})
-  end
-RUBY
-endfunction
-
-" define the NERDTree-aware aliases
-call s:DefineCommand("cd", "ChangeDirectory")
-call s:DefineCommand("touch", "Touch")
-call s:DefineCommand("rm", "Remove")
-call s:DefineCommand("e", "Edit")
+nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+" store the bookmarks file
+let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+" show hidden files, too
+let NERDTreeShowHidden=1
+" quit on opening files from the tree
+let NERDTreeQuitOnOpen=1
+" highlight the selected entry in the tree
+let NERDTreeHighlightCursorline=1
+" use a single click to fold/unfold directories and a double click to open files
+let NERDTreeMouseMode=2
+" don't display these kinds of files
+let NERDTreeIgnore=[ '^\.git$' ]
 
 " Command-T
 let g:CommandTMaxHeight=20
 
 " Ack
 set grepprg=ack
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack<space>
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 " CoffeeScript
@@ -327,22 +304,23 @@ au BufWritePost *.org :PostWriteTags
 au BufRead,BufNewFile *.org            color org_dark
 
 " Taglist
-let Tlist_Close_On_Select = 1 " close taglist window once we selected something
-let Tlist_Exit_OnlyWindow = 1 " if taglist window is the only window left, exit vim
-let Tlist_Show_Menu = 1 " show Tags menu in gvim
-let Tlist_Show_One_File = 1 " show tags of only one file
-let Tlist_GainFocus_On_ToggleOpen = 1 " automatically switch to taglist window
-let Tlist_Highlight_Tag_On_BufEnter = 1 " highlight current tag in taglist window
-let Tlist_Process_File_Always = 1 " taglist window on the right
-let Tlist_Display_Prototype = 1 " display full prototype instead of just function name
-nnoremap <F5> :TlistToggle<CR>
-nnoremap <F6> :TlistShowPrototype<CR>
+nmap <leader>l :TlistClose<CR>:TlistToggle<CR>
+nmap <leader>L :TlistClose<CR>
+let Tlist_Exit_OnlyWindow=1         " quit when TagList is the last open window
+let Tlist_GainFocus_On_ToggleOpen=1 " put focus on the TagList window when it opens
+"let Tlist_Process_File_Always=1     " process files in the background, even when the TagList window isn't open
+"let Tlist_Show_One_File=1           " only show tags from the current buffer, not all open buffers
+let Tlist_WinWidth=40               " set the width
+let Tlist_Inc_Winwidth=1            " increase window by 1 when growing
+let Tlist_Display_Prototype=1
+let Tlist_Display_Tag_Scope=0
+let Tlist_Use_Right_Window=1
 
 "" LANGUAGE SPECIFIC
 
 " CSS
 au FileType css set smartindent foldmethod=indent
-au FileType css set noexpandtab tabstop=2 shiftwidth=2
+au FileType css set expandtab tabstop=2 shiftwidth=2
 " sort css properties
 au FileType css nnoremap <leader>sort ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
 if has("mac")
@@ -357,7 +335,7 @@ endif
 au FileType html,xhtml set formatoptions+=tl
 " folding
 au FileType html,xhtml set foldmethod=indent smartindent
-au FileType html,xhtml set noexpandtab tabstop=3 shiftwidth=3
+au FileType html,xhtml set expandtab tabstop=3 shiftwidth=3
 au FileType xhtml,xml so $HOME/.vim/ftplugin/html_autoclosetag.vim
 
 " Load the current buffer in Default Web Browser or Firefox
@@ -398,21 +376,9 @@ endfunc
 
 " JavaScript
 au FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
-au FileType javascript call JavaScriptFold()
-au FileType javascript setl fen
-au FileType javascript setl nocindent
 au BufRead,BufNewFile *.json set ft=json
+au filetype javascript setlocal foldmethod=marker foldmarker={,}
 
-function! JavaScriptFold()
-    setl foldmethod=syntax
-    setl foldlevelstart=1
-    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-    function! FoldText()
-        return substitute(getline(v:foldstart), '{.*', '{...}', '')
-    endfunction
-    setl foldtext=FoldText()
-endfunction
 
 "" STATUS LINE
 
