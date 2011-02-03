@@ -75,7 +75,7 @@ set showbreak=…
 " COLOR SCHEME
 set term=xterm-256color " allow for more color
 if &t_Co >= 256 || has("gui_running")
-    colorscheme jellybeans
+    colorscheme molokai
 endif
 
 " FOLDING

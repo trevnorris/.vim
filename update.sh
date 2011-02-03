@@ -90,6 +90,9 @@ get_repo "pangloss" "vim-javascript"
 echo "Installing haskell.vim"
 get_repo "vim-scripts" "syntaxhaskell.vim"
 
+echo "Installing molokai.vim"
+get_repo "vim-scripts" "molokai"
+
 echo "Installing vim-jade"
 get_repo "digitaltoad" "vim-jade"
 
