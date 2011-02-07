@@ -73,8 +73,9 @@ set linebreak " this will not break whole words while wrap is enabled
 set showbreak=…
 
 " COLOR SCHEME
-set term=xterm-256color " allow for more color
-if &t_Co >= 256 || has("gui_running")
+set t_Co=256
+colorscheme jellybeans
+if has("gui_running")
     colorscheme molokai
 endif
 
@@ -82,7 +83,7 @@ endif
 set foldenable " enable folding
 set foldcolumn=2 " add a fold column
 set foldmethod=marker " detect triple-{ style fold markers
-set foldlevelstart=0 " start out with everything folded
+set foldlevelstart=999 " start out with nothing folded
 set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
                                 " which commands trigger auto-unfold
 function! MyFoldText()
@@ -189,12 +190,14 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " indent visual selected code without unselecting and going back to normal mode
 vmap > >gv
 vmap < <gv
-" Pull word under cursor into LHS of a substitute (for quick search and replace)
+" pull word under cursor into lhs of a substitute (for quick search and replace)
 nmap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
 " turn on spell checking
 map <leader>spell :setlocal spell!<cr>
+" insert path of current file into a command
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 
 " fast editing of the .vimrc
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
@@ -205,7 +208,7 @@ cmap w!! w !sudo tee % >/dev/null
 "" ADDITIONAL AUTOCOMMANDS
 
 " saving when focus lost (after tabbing away or switching buffers)
-au FocusLost * :up
+au FocusLost,BufLeave,WinLeave,TabLeave * silent! up
 " open in last edit place
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
@@ -248,18 +251,17 @@ source $HOME/.vim/autocorrect.vim
 "" PLUGIN SETTINGS
 
 " YankRing
-let g:yankring_history_dir = '$HOME/.vim/.tmp'
-nmap <leader>r :YRShow<CR>
+let g:yankring_enabled = 0
+" let g:yankring_history_dir = '$HOME/.vim/.tmp'
+" nmap <leader>r :YRShow<CR>
 
 " NERDTree
 nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
 " store the bookmarks file
-let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+let NERDTreeBookmarksFile=expand("$HOME/.vim/.tmp/NERDTreeBookmarks")
 " show hidden files, too
 let NERDTreeShowHidden=1
-" quit on opening files from the tree
-let NERDTreeQuitOnOpen=1
 " highlight the selected entry in the tree
 let NERDTreeHighlightCursorline=1
 " use a single click to fold/unfold directories and a double click to open files
@@ -319,16 +321,8 @@ let Tlist_Use_Right_Window=1
 "" LANGUAGE SPECIFIC
 
 " CSS
-au FileType css set smartindent foldmethod=indent
 au FileType css set expandtab tabstop=2 shiftwidth=2
-" sort css properties
 au FileType css nnoremap <leader>sort ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
-if has("mac")
-    map <leader>pik :PickHEX<CR>
-else
-    map <leader>pik <Esc>:ColorPicker<Cr>a
-    vmap <leader>pik <Del><Esc>h:ColorPicker<Cr>a
-endif
 
 " HTML
 " allow for long lines
@@ -377,7 +371,7 @@ endfunc
 " JavaScript
 au FileType javascript setlocal ts=4 sts=4 sw=4 expandtab
 au BufRead,BufNewFile *.json set ft=json
-au filetype javascript setlocal foldmethod=marker foldmarker={,}
+" au filetype javascript setlocal foldmethod=marker foldmarker={,}
 
 
 "" STATUS LINE
