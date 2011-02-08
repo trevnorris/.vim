@@ -66,9 +66,6 @@ get_repo "scrooloose" "syntastic"
 echo "Installing TComment"
 get_repo "tomtom" "tcomment_vim"
 
-echo "Installing vim-indent-guides"
-get_repo "nathanaelkane" "vim-indent-guides"
-
 echo "Installing snipMate"
 get_repo "msanders" "snipmate.vim"
 
@@ -87,8 +84,8 @@ get_repo "mileszs" "ack.vim"
 echo "Installing javascript.vim"
 get_repo "pangloss" "vim-javascript"
 
-echo "Installing haskell.vim"
-get_repo "vim-scripts" "syntaxhaskell.vim"
+echo "Installing calendar-vim"
+get_repo "mattn" "calendar-vim"
 
 echo "Installing molokai.vim"
 get_repo "vim-scripts" "molokai"
@@ -105,12 +102,6 @@ get_repo "ervandew" "supertab"
 echo "Installing jslint"
 get_repo "hallettj" "jslint.vim"
 
-echo "Installing xmledit"
-get_repo "sukima" "xmledit"
-
-echo "Installing gundo"
-get_repo "sjl" "gundo.vim"
-
 echo "Installing YankRing.vim"
 get_repo "vim-scripts" "YankRing.vim"
 
@@ -123,14 +114,8 @@ get_repo "hsitz" "VimOrganizer"
 echo "Installing vim-indent-object"
 get_repo "michaeljsmith" "vim-indent-object"
 
-echo "Installing neocomplcache"
-get_repo "Shougo" "neocomplcache"
-
 echo "Installing coffee-script"
 get_repo "kchmck" "vim-coffee-script"
-
-echo "Installing vim-markdown-preview"
-get_repo "robgleeson" "vim-markdown-preview"
 
 echo "Installing jellybeans"
 get_repo "nanotech" "jellybeans.vim"
