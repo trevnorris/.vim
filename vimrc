@@ -22,6 +22,7 @@ set mouse=a                         " allow for full mouse support
 set autowrite
 set number                          " show line numbers
 set showcmd                         " show typed commands
+set virtualedit=all                 " allow cursor to freely roam anywhere
 
 set wildmenu                        " turn on WiLd menu
 set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
@@ -52,6 +53,7 @@ set directory=~/.vim/.swp,/tmp      " swap directory
 if v:version >= 703
     set undofile
     set undodir=$HOME/.vim/.undo
+    set colorcolumn=115 " show a right margin column
 endif
 set shiftwidth=4                    " set tab width
 set softtabstop=4
@@ -68,7 +70,7 @@ set showbreak=…
 set t_Co=256
 colorscheme jellybeans
 if has("gui_running")
-    colorscheme molokai
+    colorscheme jellybeans
 endif
 
 " FOLDING
@@ -80,8 +82,6 @@ set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trail
 set tags+=../tags,../../tags,../../../tags,../../../../tags " look for all the tags files in the recurrent directories
 
 set cursorline " highlight current line
-set colorcolumn=115 " show a right margin column
-
 syntax enable " enable syntax highlighting
 
 " ADDITIONAL KEY MAPPINGS
