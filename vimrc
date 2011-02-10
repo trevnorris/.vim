@@ -22,11 +22,10 @@ set mouse=a                         " allow for full mouse support
 set autowrite
 set number                          " show line numbers
 set showcmd                         " show typed commands
-set virtualedit=all                 " allow cursor to freely roam anywhere
 
 set wildmenu                        " turn on WiLd menu
 set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
-set wildignore+=*.o,.git
+set wildignore+=*.o,.git,.svn
 
 set ruler                           " always show current position
 set backspace=indent,eol,start      " set backspace config, backspace as normal
@@ -213,7 +212,7 @@ let NERDTreeHighlightCursorline=1
 " use a single click to fold/unfold directories and a double click to open files
 let NERDTreeMouseMode=2
 " don't display these kinds of files
-let NERDTreeIgnore=[ '^\.git$' ]
+let NERDTreeIgnore=[ '^\.git$','^\.svn$' ]
 
 " Command-T
 let g:CommandTMaxHeight=20
@@ -276,11 +275,7 @@ au FileType xhtml,xml so $HOME/.vim/ftplugin/html_autoclosetag.vim
 " Load the current buffer in Default Web Browser or Firefox
 au Filetype html,xhtml nmap <leader>pv : call PreviewInBrowser()<CR>
 func! PreviewInBrowser()
-    if has("mac")
-        exec "!open %"
-    else
-        exec "!xdg-open %"
-    endif
+   exec "!firefox %"
 endfunc
 
 " LESS
