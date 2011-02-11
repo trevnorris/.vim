@@ -76,6 +76,7 @@ endif
 set foldenable                                                           " enable folding
 set foldcolumn=2                                                         " add a fold column
 set foldmethod=marker                                                    " detect triple-{ style fold markers
+set foldlevel=99
 
 set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trailing tab
 set tags+=../tags,../../tags,../../../tags,../../../../tags " look for all the tags files in the recurrent directories
