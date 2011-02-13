@@ -12,12 +12,9 @@ let mapleader = ","
 
 " CONFIGURATION MAPPING
 set showmode                        " display the mode you're in
-set history=500                     " sets how many lines of history VIM has to remember
-set undolevels=500
 set scrolloff=3                     " show 3 lines of context around the cursor
 set autoread                        " set to auto read when a file is changed from the outside
 set visualbell                      " Use visual bell
-set mousehide                       " hide mouse cursor when typing
 set mouse=a                         " allow for full mouse support
 set autowrite
 set number                          " show line numbers
@@ -49,11 +46,6 @@ set nobackup                        " prevent backups of files, since using vers
 set nowritebackup
 set noswapfile
 set directory=~/.vim/.swp,/tmp      " swap directory
-if v:version >= 703
-    set undofile
-    set undodir=$HOME/.vim/.undo
-    set colorcolumn=115 " show a right margin column
-endif
 set shiftwidth=4                    " set tab width
 set softtabstop=4
 set tabstop=4
@@ -64,6 +56,18 @@ set autoindent                      " set automatic code indentation
 set wrap                            " wrap lines
 set linebreak                       " this will not break whole words while wrap is enabled
 set showbreak=…
+set cursorline                      " highlight current line
+set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trailing tab
+
+syntax enable                       " enable syntax highlighting
+
+" VIM 7.3 FEATURES
+
+if v:version >= 703
+    set undofile
+    set undodir=$HOME/.vim/.undo
+    set colorcolumn=115             " show a right margin column
+endif
 
 " COLOR SCHEME
 set t_Co=256
@@ -74,43 +78,21 @@ endif
 
 " FOLDING
 set foldenable                                                           " enable folding
-set foldcolumn=2                                                         " add a fold column
 set foldmethod=marker                                                    " detect triple-{ style fold markers
 set foldlevel=99
 
-set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trailing tab
-set tags+=../tags,../../tags,../../../tags,../../../../tags " look for all the tags files in the recurrent directories
-
-set cursorline " highlight current line
-syntax enable " enable syntax highlighting
-
 " ADDITIONAL KEY MAPPINGS
 
-" fast commands
-map ; :
 " fast saving
 nmap <leader>w :up<cr>
 " fast escaping
 imap jj <ESC>
-" fast quiting
-imap <leader>q :q<cr>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
 " clear highlight
 nnoremap <leader><space> :noh<cr>
-" display hidden non printable characters
-nmap <leader>l :set list!<CR>
-" re hardwrap text
-nnoremap <leader>q gqip
-" space to toggle folds
-nnoremap <space> za
 " map Y to match C and D behavior
-nmap Y y$
-" yank/paste to the OS clipboard with ,y and ,p
-nmap <leader>y "+y
-nmap <leader>Y "+yy
-nmap <leader>p "+p
-nmap <leader>P "+P
+nnoremap Y y$
 " yank entire file (global yank)
 nmap gy ggVGy
 " ignore lines when going up or down
@@ -124,37 +106,25 @@ inoremap {<CR>  {<CR>}<Esc>O
 inoremap (<CR>  (<CR>)<Esc>O
 inoremap [<CR>  [<CR>]<Esc>O
 " fast window switching
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 map <leader>, <C-W>w
 " cycle between buffers
-map <right> :bn<cr>
-map <left> :bp<cr>
 map <leader>b :b#<cr>
 " change directory to current buffer
 map <leader>cd :cd %:p:h<cr>
 " swap implementations of ` and ' jump to prefer row and column jumping
 nnoremap ' `
 nnoremap ` '
-" move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`j
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " indent visual selected code without unselecting and going back to normal mode
 vmap > >gv
 vmap < <gv
 " pull word under cursor into lhs of a substitute (for quick search and replace)
-nmap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
+nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
 " turn on spell checking
 map <leader>spell :setlocal spell!<cr>
 " insert path of current file into a command
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
 " fast editing of the .vimrc
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <silent> <leader>sv :so $MYVIMRC<cr>
@@ -191,11 +161,8 @@ endif
 
 " insert date
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-" environment
-iab #! #!/bin/sh
 " lorem ipsum text
 iab lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-iab llorem Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 " common abbrev., mispellings
 source $HOME/.vim/autocorrect.vim
 
@@ -203,7 +170,6 @@ source $HOME/.vim/autocorrect.vim
 
 " NERDTree
 nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
 " store the bookmarks file
 let NERDTreeBookmarksFile=expand("$HOME/.vim/.tmp/NERDTreeBookmarks")
 " show hidden files, too
@@ -214,6 +180,14 @@ let NERDTreeHighlightCursorline=1
 let NERDTreeMouseMode=2
 " don't display these kinds of files
 let NERDTreeIgnore=[ '^\.git$','^\.svn$' ]
+
+" Unimpaired
+" bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+" bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
 
 " Command-T
 let g:CommandTMaxHeight=20
@@ -236,17 +210,6 @@ if has("gui_running")
 else
     let g:JSLintHighlightErrorLine = 0
 endif
-
-" VimOrganizer
-let g:org_todo_setup='TODO | DONE'
-let g:org_tag_setup='{@home(h) @work(w) @tennisclub(t)} \n {easy(e) hard(d)} \n {computer(c) phone(p)}'
-
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-au BufRead,BufNewFile *.org            call org#SetOrgFileType()
-au BufRead *.org :PreLoadTags
-au BufWrite *.org :PreWriteTags
-au BufWritePost *.org :PostWriteTags
-au BufRead,BufNewFile *.org            color org_dark
 
 " Taglist
 nmap <leader>l :TlistClose<CR>:TlistToggle<CR>

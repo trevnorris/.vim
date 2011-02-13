@@ -50,7 +50,7 @@ echo "Creating .vim folders if necessary"
 mkdir -p $DOTVIM/{autoload,bundle}
 cd $DOTVIM/bundle/
 
-tpope_repos=(git surround unimpaired abolish repeat markdown ragtag fugitive)
+tpope_repos=(git surround unimpaired abolish repeat markdown ragtag fugitive speeddating)
 
 for r in ${tpope_repos[*]}; do
     repo="vim-$r"
@@ -84,6 +84,9 @@ get_repo "mileszs" "ack.vim"
 echo "Installing javascript.vim"
 get_repo "pangloss" "vim-javascript"
 
+echo "Installing haskell.vim"
+get_repo "vim-scripts" "haskell.vim"
+
 echo "Installing calendar-vim"
 get_repo "mattn" "calendar-vim"
 
@@ -108,23 +111,14 @@ get_repo "vim-scripts" "YankRing.vim"
 echo "Installing align"
 get_repo "tsaleh" "vim-align"
 
-echo "Installing vimorganizer"
-get_repo "hsitz" "VimOrganizer"
-
-echo "Installing vim-indent-object"
-get_repo "michaeljsmith" "vim-indent-object"
+echo "Installing vim-orgmode"
+get_repo "jceb" "vim-orgmode"
 
 echo "Installing coffee-script"
 get_repo "kchmck" "vim-coffee-script"
 
 echo "Installing jellybeans"
 get_repo "nanotech" "jellybeans.vim"
-
-echo "Installing jellyx.vim"
-get_repo "guns" "jellyx.vim"
-
-echo "Installing perfect"
-get_repo "kossnocorp" "perfect.vim"
 
 echo "Installing Command-T"
 get_repo "wincent" "Command-T"
