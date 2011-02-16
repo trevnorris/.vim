@@ -105,9 +105,6 @@ get_repo "ervandew" "supertab"
 echo "Installing jslint"
 get_repo "hallettj" "jslint.vim"
 
-echo "Installing YankRing.vim"
-get_repo "vim-scripts" "YankRing.vim"
-
 echo "Installing align"
 get_repo "tsaleh" "vim-align"
 
