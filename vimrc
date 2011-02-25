@@ -246,7 +246,7 @@ endfunc
 au BufNewFile,BufRead *.less set ft=less
 
 " Ruby
-au FileType ruby setlocal ts=2 sts=2 sw=2 noexpandtab foldmethod=syntax
+au FileType ruby setlocal ts=2 sts=2 sw=2 expandtab foldmethod=syntax
 
 " Python
 au FileType python set noexpandtab
