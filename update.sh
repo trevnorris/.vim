@@ -105,8 +105,8 @@ get_repo "ervandew" "supertab"
 echo "Installing jslint"
 get_repo "hallettj" "jslint.vim"
 
-echo "Installing align"
-get_repo "tsaleh" "vim-align"
+echo "Installing tabular"
+get_repo "godlygeek" "tabular"
 
 echo "Installing vim-orgmode"
 get_repo "jceb" "vim-orgmode"
