@@ -66,11 +66,17 @@ get_repo "scrooloose" "syntastic"
 echo "Installing TComment"
 get_repo "tomtom" "tcomment_vim"
 
+echo "Installing Explorer"
+get_repo "vim-scripts" "LustyExplorer"
+
 echo "Installing snipMate"
 get_repo "msanders" "snipmate.vim"
 
 echo "Installing vim-ruby"
 get_repo "vim-ruby" "vim-ruby"
+
+echo "Installing xmledit"
+get_repo "sukima" "xmledit"
 
 echo "Installing vim-matchit"
 get_repo "mhz" "vim-matchit"

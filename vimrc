@@ -8,6 +8,7 @@ silent! call pathogen#helptags()
 filetype plugin indent on
 
 " MAP LEADER
+noremap , \
 let mapleader = ","
 
 " CONFIGURATION MAPPING
@@ -52,6 +53,7 @@ set tabstop=4
 set smarttab
 set expandtab
 set autoindent                      " set automatic code indentation
+set hidden
 
 set wrap                            " wrap lines
 set linebreak                       " this will not break whole words while wrap is enabled
@@ -178,6 +180,10 @@ let NERDTreeShowHidden=1
 let NERDTreeHighlightCursorline=1
 " use a single click to fold/unfold directories and a double click to open files
 let NERDTreeMouseMode=2
+" automatically CWD to root node
+let NERDTreeChDirMode=2
+" close NERDTree after file is opened
+let NERDTreeQuitOnOpen=1
 " don't display these kinds of files
 let NERDTreeIgnore=[ '^\.git$','^\.svn$' ]
 
@@ -234,7 +240,6 @@ au FileType html,xhtml set formatoptions+=tl
 " folding
 au FileType html,xhtml set foldmethod=indent smartindent
 au FileType html,xhtml set expandtab tabstop=3 shiftwidth=3
-au FileType xhtml,xml so $HOME/.vim/ftplugin/html_autoclosetag.vim
 
 " Load the current buffer in Default Web Browser or Firefox
 au Filetype html,xhtml nmap <leader>pv : call PreviewInBrowser()<CR>
