@@ -240,6 +240,7 @@ au FileType html,xhtml set formatoptions+=tl
 " folding
 au FileType html,xhtml set foldmethod=indent smartindent
 au FileType html,xhtml set expandtab tabstop=3 shiftwidth=3
+au FileType html,php,xhtml,jsp,ejs let b:delimitMate_matchpairs = "(:),[:],{:}"
 
 " Load the current buffer in Default Web Browser or Firefox
 au Filetype html,xhtml nmap <leader>pv : call PreviewInBrowser()<CR>
