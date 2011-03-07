@@ -117,6 +117,9 @@ get_repo "godlygeek" "tabular"
 echo "Installing vim-orgmode"
 get_repo "jceb" "vim-orgmode"
 
+# echo "Installing VimOrganizer"
+# get_repo "grncdr" "VimOrganizer"
+
 echo "Installing coffee-script"
 get_repo "kchmck" "vim-coffee-script"
 

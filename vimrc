@@ -91,6 +91,7 @@ nmap <leader>w :up<cr>
 imap jj <ESC>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
+imap <F1> <ESC>
 " clear highlight
 nnoremap <leader><space> :noh<cr>
 " map Y to match C and D behavior
