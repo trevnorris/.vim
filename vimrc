@@ -199,6 +199,9 @@ vmap <C-Down> ]egv
 " Command-T
 let g:CommandTMaxHeight=20
 
+" LustyExporer
+let g:LustyExplorerSuppressRubyWarning=1
+
 " Ack
 set grepprg=ack
 nnoremap <leader>a :Ack<space>
