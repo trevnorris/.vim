@@ -66,9 +66,6 @@ get_repo "scrooloose" "syntastic"
 echo "Installing TComment"
 get_repo "tomtom" "tcomment_vim"
 
-echo "Installing Juggler"
-get_repo "vim-scripts" "LustyJuggler"
-
 echo "Installing snipMate"
 get_repo "msanders" "snipmate.vim"
 
