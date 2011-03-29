@@ -75,6 +75,12 @@ get_repo "vim-ruby" "vim-ruby"
 echo "Installing xmledit"
 get_repo "sukima" "xmledit"
 
+echo "Installing solarized"
+get_repo "altercation" "vim-colors-solarized"
+
+echo "Installing xoria256.vim"
+get_repo "guns" "xoria256.vim"
+
 echo "Installing vim-matchit"
 get_repo "mhz" "vim-matchit"
 

@@ -15,10 +15,9 @@ let mapleader = ","
 set showmode                        " display the mode you're in
 set scrolloff=3                     " show 3 lines of context around the cursor
 set autoread                        " set to auto read when a file is changed from the outside
-set visualbell                      " Use visual bell
 set mouse=a                         " allow for full mouse support
 set autowrite
-set number                          " show line numbers
+" set number                          " show line numbers
 set showcmd                         " show typed commands
 
 set wildmenu                        " turn on WiLd menu
@@ -73,9 +72,10 @@ endif
 
 " COLOR SCHEME
 set t_Co=256
-colorscheme jellybeans
+set background=dark
+colorscheme xoria256
 if has("gui_running")
-    colorscheme jellybeans
+    colorscheme ir_black
 endif
 
 " FOLDING
@@ -111,7 +111,7 @@ inoremap [<CR>  [<CR>]<Esc>O
 " fast window switching
 map <leader>, <C-W>w
 " cycle between buffers
-map <leader>b :b#<cr>
+map <leader>. :b#<cr>
 " change directory to current buffer
 map <leader>cd :cd %:p:h<cr>
 " swap implementations of ` and ' jump to prefer row and column jumping
