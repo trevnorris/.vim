@@ -102,6 +102,9 @@ get_repo "mattn" "calendar-vim"
 echo "Installing molokai.vim"
 get_repo "vim-scripts" "molokai"
 
+echo "Installing distinguished.vim"
+get_repo "Lokaltog" "vim-distinguished"
+
 echo "Installing vim-jade"
 get_repo "digitaltoad" "vim-jade"
 
@@ -112,7 +115,7 @@ echo "Installing supertab"
 get_repo "ervandew" "supertab"
 
 echo "Installing jslint"
-get_repo "hallettj" "jslint.vim"
+get_repo "intuited" "jslint.vim"
 
 echo "Installing tabular"
 get_repo "godlygeek" "tabular"

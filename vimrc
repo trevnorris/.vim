@@ -75,7 +75,7 @@ set t_Co=256
 set background=dark
 colorscheme xoria256
 if has("gui_running")
-    colorscheme ir_black
+    colorscheme jellybeans
 endif
 
 " FOLDING
