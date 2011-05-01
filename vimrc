@@ -72,10 +72,10 @@ endif
 
 " COLOR SCHEME
 set t_Co=256
-set background=dark
+set background=light
 colorscheme xoria256
 if has("gui_running")
-    colorscheme jellybeans
+    colorscheme solarized
 endif
 
 " FOLDING
