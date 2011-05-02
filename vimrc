@@ -72,9 +72,9 @@ endif
 
 " COLOR SCHEME
 set t_Co=256
-set background=light
 colorscheme xoria256
 if has("gui_running")
+    set background=dark
     colorscheme solarized
 endif
 
