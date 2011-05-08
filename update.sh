@@ -102,9 +102,6 @@ get_repo "mattn" "calendar-vim"
 echo "Installing molokai.vim"
 get_repo "vim-scripts" "molokai"
 
-echo "Installing distinguished.vim"
-get_repo "Lokaltog" "vim-distinguished"
-
 echo "Installing vim-jade"
 get_repo "digitaltoad" "vim-jade"
 
@@ -119,6 +116,9 @@ get_repo "basyura" "jslint.vim"
 
 echo "Installing tabular"
 get_repo "godlygeek" "tabular"
+
+echo "Installing utl.vim"
+get_repo "vim-scripts" "utl.vim"
 
 echo "Installing vim-orgmode"
 get_repo "jceb" "vim-orgmode"
