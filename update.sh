@@ -115,7 +115,7 @@ echo "Installing supertab"
 get_repo "ervandew" "supertab"
 
 echo "Installing jslint"
-get_repo "intuited" "jslint.vim"
+get_repo "basyura" "jslint.vim"
 
 echo "Installing tabular"
 get_repo "godlygeek" "tabular"
@@ -124,7 +124,7 @@ echo "Installing vim-orgmode"
 get_repo "jceb" "vim-orgmode"
 
 # echo "Installing VimOrganizer"
-# get_repo "grncdr" "VimOrganizer"
+# get_repo "hsitz" "VimOrganizer"
 
 echo "Installing coffee-script"
 get_repo "kchmck" "vim-coffee-script"

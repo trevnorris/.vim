@@ -22,7 +22,7 @@ set showcmd                         " show typed commands
 
 set wildmenu                        " turn on WiLd menu
 set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
-set wildignore+=*.o,.git,.svn
+set wildignore+=*.o,.git,.svn,node_modules
 
 set ruler                           " always show current position
 set backspace=indent,eol,start      " set backspace config, backspace as normal
@@ -75,7 +75,7 @@ set t_Co=256
 colorscheme xoria256
 if has("gui_running")
     set background=dark
-    colorscheme solarized
+    colorscheme molokai
 endif
 
 " FOLDING
@@ -199,6 +199,7 @@ vmap <C-Down> ]egv
 
 " Command-T
 let g:CommandTMaxHeight=20
+let g:CommandTMatchWindowAtTop=1
 
 " LustyExporer
 let g:LustyExplorerSuppressRubyWarning=1
