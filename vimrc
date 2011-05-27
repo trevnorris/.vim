@@ -74,8 +74,8 @@ endif
 set t_Co=256
 colorscheme xoria256
 if has("gui_running")
-    set background=dark
-    colorscheme molokai
+    set background=light
+    colorscheme candycode
 endif
 
 " FOLDING
@@ -145,7 +145,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 
 if has("gui_running")
     set guioptions-=T
-    " set guioptions-=m
+    set guioptions-=m
     set linespace=6
     set columns=170 lines=30
     set guioptions-=T
@@ -180,8 +180,6 @@ let NERDTreeBookmarksFile=expand("$HOME/.vim/.tmp/NERDTreeBookmarks")
 let NERDTreeShowHidden=1
 " highlight the selected entry in the tree
 let NERDTreeHighlightCursorline=1
-" use a single click to fold/unfold directories and a double click to open files
-let NERDTreeMouseMode=2
 " automatically CWD to root node
 let NERDTreeChDirMode=2
 " close NERDTree after file is opened
@@ -199,7 +197,6 @@ vmap <C-Down> ]egv
 
 " Command-T
 let g:CommandTMaxHeight=20
-let g:CommandTMatchWindowAtTop=1
 
 " LustyExporer
 let g:LustyExplorerSuppressRubyWarning=1
