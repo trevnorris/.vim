@@ -57,20 +57,14 @@ for r in ${tpope_repos[*]}; do
     get_repo "tpope" $repo
 done
 
-echo "Installing NERDTree"
+echo "Installing NerdTree"
 get_repo "scrooloose" "nerdtree"
-
-echo "Installing Syntastic"
-get_repo "scrooloose" "syntastic"
 
 echo "Installing TComment"
 get_repo "tomtom" "tcomment_vim"
 
 echo "Installing snipMate"
 get_repo "msanders" "snipmate.vim"
-
-echo "Installing vim-ruby"
-get_repo "vim-ruby" "vim-ruby"
 
 echo "Installing xmledit"
 get_repo "sukima" "xmledit"
@@ -83,9 +77,6 @@ get_repo "guns" "xoria256.vim"
 
 echo "Installing vim-matchit"
 get_repo "mhz" "vim-matchit"
-
-echo "Installing taglist.vim"
-get_repo "jc00ke" "taglist.vim"
 
 echo "Installing ack.vim"
 get_repo "mileszs" "ack.vim"
@@ -111,8 +102,8 @@ get_repo "Raimondi" "delimitMate"
 echo "Installing supertab"
 get_repo "ervandew" "supertab"
 
-echo "Installing jslint"
-get_repo "basyura" "jslint.vim"
+echo "Installing jshint"
+get_repo "walm" "jshint.vim"
 
 echo "Installing tabular"
 get_repo "godlygeek" "tabular"
