@@ -96,11 +96,15 @@ get_repo "vim-scripts" "molokai"
 echo "Installing vim-jade"
 get_repo "digitaltoad" "vim-jade"
 
+echo "Installing vim-stylus"
+get_repo "wavded" "vim-stylus"
+
 echo "Installing delimitMate"
 get_repo "Raimondi" "delimitMate"
 
 echo "Installing neocomplcache"
 get_repo "Shougo" "neocomplcache"
+
 # echo "Installing supertab"
 # get_repo "ervandew" "supertab"
 
