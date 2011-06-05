@@ -99,8 +99,10 @@ get_repo "digitaltoad" "vim-jade"
 echo "Installing delimitMate"
 get_repo "Raimondi" "delimitMate"
 
-echo "Installing supertab"
-get_repo "ervandew" "supertab"
+echo "Installing neocomplcache"
+get_repo "Shougo" "neocomplcache"
+# echo "Installing supertab"
+# get_repo "ervandew" "supertab"
 
 echo "Installing jshint"
 get_repo "walm" "jshint.vim"

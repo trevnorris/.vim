@@ -69,9 +69,9 @@ endif
 
 " COLOR SCHEME
 set t_Co=256
-colorscheme xoria256
+set background=dark
+colorscheme solarized
 if has("gui_running")
-    set background=dark
     colorscheme xoria256
 endif
 
@@ -167,6 +167,12 @@ let g:NERDTreeMinimalUI=1
 let g:NERDTreeDirArrows=1
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
+
+" NeoComplCache
+let g:neocomplcache_enable_at_startup=1
+let g:neocomplcache_enable_smart_case=1
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Unimpaired
 " bubble single lines

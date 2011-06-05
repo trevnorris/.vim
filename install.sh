@@ -4,6 +4,7 @@ fail () {
   echo "$@" >&2
   exit 1
 }
+
 SCRIPT=$0
 SCRIPTDIR=$(dirname -- "$SCRIPT")
 for i in $HOME/.{g,}vim{rc,rc.local}; do
