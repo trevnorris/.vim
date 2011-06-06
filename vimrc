@@ -97,9 +97,6 @@ nmap gy ggVGy
 " ignore lines when going up or down
 nnoremap j gj
 nnoremap k gk
-" move around matching bracket pairs
-nnoremap <tab> %
-vnoremap <tab> %
 " auto complete {} indent and position the cursor in the middle line
 inoremap {<CR>  {<CR>}<Esc>O
 inoremap (<CR>  (<CR>)<Esc>O
@@ -168,8 +165,13 @@ let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
 
 " NeoComplCache
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_smart_case=1
+let g:acp_enableAtStartup=0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_auto_completion_start_length = 3
+let g:neocomplcache_manual_completion_start_length = 3
+
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Unimpaired
 " bubble single lines
@@ -235,10 +237,10 @@ set statusline+=%m  "modified flag
 
 " display the filesize
 set statusline+=[%{FileSize()}]
-set statusline+=\ 
+set statusline+=\
 " display current git branch
 set statusline+=%{fugitive#statusline()}
-set statusline+=\ 
+set statusline+=\
 " display a warning with Syntastic, of validation errors and syntax checkers
 set statusline+=%#warningmsg#
 set statusline+=%*
