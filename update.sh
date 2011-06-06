@@ -138,7 +138,7 @@ rake make
 cd $DOTVIM/autoload
 echo "Fetching latest pathogen.vim"
 rm pathogen.vim
-curl -O https://github.com/tpope/vim-pathogen/raw/master/autoload/pathogen.vim
+curl -O https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 echo "Checking to see if pathogen has already been added to .vimrc"
 pathogen_cmd="call pathogen#runtime_append_all_bundles()"
