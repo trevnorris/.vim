@@ -151,7 +151,7 @@ if has("gui_running")
     if has("mac")
         set guifont=DejaVu\ Sans\ Mono\:h14
     else
-        set guifont=Droid\ Sans\ Mono\ 10
+        set guifont=UbuntuBeta\ Mono\ 11
     endif
 endif
 
