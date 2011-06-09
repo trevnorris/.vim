@@ -164,14 +164,8 @@ let g:NERDTreeDirArrows=1
 let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
 
-" NeoComplCache
-let g:acp_enableAtStartup=0
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_auto_completion_start_length = 3
-let g:neocomplcache_manual_completion_start_length = 3
-
-imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" Super Tab
+" let g:SuperTabDefaultCompletionType = "context"
 
 " Unimpaired
 " bubble single lines
