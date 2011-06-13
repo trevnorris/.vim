@@ -60,6 +60,12 @@ done
 echo "Installing NerdTree"
 get_repo "scrooloose" "nerdtree"
 
+echo "Installing NerdCommenter"
+get_repo "scrooloose" "nerdcommenter"
+
+echo "Installing ZenCoding"
+get_repo "mattn" "zencoding-vim"
+
 echo "Installing TComment"
 get_repo "tomtom" "tcomment_vim"
 
