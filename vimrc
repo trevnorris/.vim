@@ -12,64 +12,60 @@ noremap , \
 let mapleader = ","
 
 " CONFIGURATION MAPPING
-set scrolloff=3                     " show 3 lines of context around the cursor
-set autoread                        " set to auto read when a file is changed from the outside
-set mouse=a                         " allow for full mouse support
-set autowrite
-set showcmd                         " show typed commands
+set scrolloff=3						" show 3 lines of context around the cursor
+set autoread						" set to auto read when a file is changed from the outside
+set showcmd							" show typed commands
 
-set wildmenu                        " turn on WiLd menu
+set wildmenu						" turn on WiLd menu
 set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
 set wildignore+=*.o,.git,.svn,node_modules
 
-set ruler                           " always show current position
-set backspace=indent,eol,start      " set backspace config, backspace as normal
-set nomodeline                      " security
+set ruler							" always show current position
+set backspace=indent,eol,start		" set backspace config, backspace as normal
+set nomodeline						" security
 set encoding=utf8
 
-set hlsearch                        " highlight search things
-set incsearch                       " go to search results as typing
-set smartcase                       " but case-sensitive if expression contains a capital letter.
-set ignorecase                      " ignore case when searching
-set gdefault                        " assume global when searching or substituting
-set magic                           " set magic on, for regular expressions
-set showmatch                       " show matching brackets when text indicator is over them
+set hlsearch						" highlight search things
+set incsearch						" go to search results as typing
+set smartcase						" but case-sensitive if expression contains a capital letter.
+set ignorecase						" ignore case when searching
+set gdefault						" assume global when searching or substituting
+set magic							" set magic on, for regular expressions
+set showmatch						" show matching brackets when text indicator is over them
 
-set lazyredraw                      " don't redraw screen during macros
-set ttyfast                         " improves redrawing for newer computers
+set ttyfast							" improves redrawing for newer computers
 set fileformats=unix,mac,dos
 
-set nobackup                        " prevent backups of files, since using versioning mostly and undofile
+set nobackup						" prevent backups of files, since using versioning mostly and undofile
 set nowritebackup
 set noswapfile
-set directory=~/.vim/.swp,/tmp      " swap directory
-set shiftwidth=4                    " set tab width
+set directory=~/.vim/.swp,/tmp		" swap directory
+set shiftwidth=4					" set tab width
 set softtabstop=4
 set tabstop=4
 set smarttab
-set expandtab
-set autoindent                      " set automatic code indentation
+set autoindent						" set automatic code indentation
 set hidden
 
-set nowrap                          " no line wrapping
-set linebreak                       " this will not break whole words while wrap is enabled
+set linebreak						" this will not break whole words while wrap is enabled
 set showbreak=…
-set cursorline                      " highlight current line
+set cursorline						" highlight current line
 set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trailing tab
 
-set cpoptions+=$                    " changed end with $ while typing
-set nu                              " turn on line numbering
-set virtualedit=onemore             " alter virtual edit mode
-set pastetoggle=<F3>                " set pastetoggle shortcut
+set nowrap							" no line wrapping
+set cpoptions+=$					" changed end with $ while typing
+set nu								" turn on line numbering
+set virtualedit=onemore				" alter virtual edit mode
+set pastetoggle=<F3>				" set pastetoggle shortcut
 
-syntax enable                       " enable syntax highlighting
+syntax enable						" enable syntax highlighting
 
 " VIM 7.3 FEATURES
 
 if v:version >= 703
-    set undofile
-    set undodir=$HOME/.vim/.undo
-    set colorcolumn=115          " show a right margin column
+	set undofile
+	set undodir=$HOME/.vim/.undo
+	"set colorcolumn=115			" show a right margin column
 endif
 
 " COLOR SCHEME
@@ -77,12 +73,12 @@ set t_Co=256
 set background=dark
 colorscheme xoria256
 if has("gui_running")
-    colorscheme xoria256
+	colorscheme xoria256
 endif
 
 " FOLDING
-set foldenable                   " enable folding
-set foldmethod=marker            " detect triple-{ style fold markers
+set foldenable						" enable folding
+set foldmethod=marker				" detect triple-{ style fold markers
 set foldlevel=99
 
 " ADDITIONAL KEY MAPPINGS
@@ -97,9 +93,6 @@ nnoremap <leader><space> :noh<cr>
 nnoremap Y y$
 " yank entire file (global yank)
 nmap gy ggVGy
-" ignore lines when going up or down
-nnoremap j gj
-nnoremap k gk
 " fast window switching
 map <leader>, <C-W>w
 " cycle between buffers
@@ -157,21 +150,21 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 "" ADDITIONAL GUI SETTINGS
 
 if has("gui_running")
-    set guioptions-=T
-    set guioptions-=m
-    set linespace=6
-    set columns=170 lines=30
-    set guioptions-=T
+	set guioptions-=T
+	set guioptions-=m
+	set linespace=6
+	set columns=170 lines=30
+	set guioptions-=T
 
-    " crazy hack to get gvim to remove all scrollbars
-    set guioptions+=LlRrb
-    set guioptions-=LlRrb
+	" crazy hack to get gvim to remove all scrollbars
+	set guioptions+=LlRrb
+	set guioptions-=LlRrb
 
-    if has("mac")
-        set guifont=DejaVu\ Sans\ Mono\:h14
-    else
-        set guifont=UbuntuBeta\ Mono\ 11
-    endif
+	if has("mac")
+	    set guifont=DejaVu\ Sans\ Mono\:h14
+	else
+	    set guifont=UbuntuBeta\ Mono\ 11
+	endif
 endif
 
 "" ABBREVIATIONS
@@ -236,13 +229,13 @@ set statusline=%F%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[ASCII=\%03
 set laststatus=2  " always show status line
 
 function! FileSize()
-    let bytes = getfsize(expand("%:p"))
-    if bytes <= 0
-        return ""
-    endif
-    if bytes < 1024
-        return bytes . " Bytes"
-    else
-        return (bytes / 1024) . "kB"
-    endif
+	let bytes = getfsize(expand("%:p"))
+	if bytes <= 0
+	    return ""
+	endif
+	if bytes < 1024
+	    return bytes . " Bytes"
+	else
+	    return (bytes / 1024) . "kB"
+	endif
 endfunction
