@@ -71,9 +71,9 @@ endif
 " COLOR SCHEME
 set t_Co=256
 set background=dark
-colorscheme xoria256
+colorscheme ir_black
 if has("gui_running")
-	colorscheme xoria256
+	colorscheme ir_black
 endif
 
 " FOLDING

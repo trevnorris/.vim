@@ -75,11 +75,11 @@ get_repo "msanders" "snipmate.vim"
 echo "Installing xmledit"
 get_repo "sukima" "xmledit"
 
-echo "Installing solarized"
-get_repo "altercation" "vim-colors-solarized"
-
 echo "Installing xoria256.vim"
 get_repo "guns" "xoria256.vim"
+
+echo "Installing ir_black"
+get_repo "wgibbs" "vim-irblack"
 
 echo "Installing ack.vim"
 get_repo "mileszs" "ack.vim"
