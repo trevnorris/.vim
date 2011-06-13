@@ -51,11 +51,16 @@ set expandtab
 set autoindent                      " set automatic code indentation
 set hidden
 
-set wrap                            " wrap lines
+set nowrap                          " no line wrapping
 set linebreak                       " this will not break whole words while wrap is enabled
 set showbreak=…
 set cursorline                      " highlight current line
 set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trailing tab
+
+set cpoptions+=$                    " changed end with $ while typing
+set nu                              " turn on line numbering
+set virtualedit=onemore             " alter virtual edit mode
+set pastetoggle=<F3>                " set pastetoggle shortcut
 
 syntax enable                       " enable syntax highlighting
 
@@ -70,9 +75,9 @@ endif
 " COLOR SCHEME
 set t_Co=256
 set background=dark
-colorscheme solarized
+colorscheme xoria256
 if has("gui_running")
-    colorscheme solarized
+    colorscheme xoria256
 endif
 
 " FOLDING
@@ -83,8 +88,6 @@ set foldlevel=99
 " ADDITIONAL KEY MAPPINGS
 " fast saving
 nmap <leader>w :up<cr>
-" fast escaping
-imap jj <ESC>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
 imap <F1> <ESC>
@@ -97,10 +100,6 @@ nmap gy ggVGy
 " ignore lines when going up or down
 nnoremap j gj
 nnoremap k gk
-" auto complete {} indent and position the cursor in the middle line
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap (<CR>  (<CR>)<Esc>O
-inoremap [<CR>  [<CR>]<Esc>O
 " fast window switching
 map <leader>, <C-W>w
 " cycle between buffers
@@ -124,6 +123,29 @@ nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <silent> <leader>sv :so $MYVIMRC<cr>
 " allow saving when you forgot sudo
 cmap w!! w !sudo tee % >/dev/null
+
+" create different delete key that maps to black hole
+nnoremap <C-X> "_d
+vnoremap <C-X> "_d
+" easily create new tabs
+nnoremap <C-T> :tabnew<CR>
+" shift screen buffer up, down and side to side
+nnoremap <C-J> 3<C-E>
+nnoremap <C-K> 3<C-Y>
+nnoremap <C-L> 3zl
+nnoremap <C-H> 3zh
+" easier movement between tabs
+nnoremap <C-N> :tabnext<CR>
+nnoremap <C-P> :tabprevious<CR>
+nnoremap <C-E> :NERDTree<CR>
+" set commands for different file types
+command Node !node %
+nnoremap <Leader>ej :w<CR>:Node<Return>
+command Php5 !php5 %
+nnoremap <Leader>ep :w<CR>:Php5<Return>
+" macros for common entries
+noremap <Leader>dj oi/* debug:start */i/* debug:stop */kA
+noremap <Leader>dp oi/* debug:start */i/* debug:stop */kA
 
 "" ADDITIONAL AUTOCOMMANDS
 
@@ -210,40 +232,7 @@ au BufRead,BufNewFile *.json set ft=json
 "" STATUS LINE
 
 set laststatus=2 " always hide the statusline
-set statusline= " clear the statusline for when vimrc is reloaded
-set statusline+=%-2.2n\  " buffer number
-set statusline+=%f\  " tail of the filename
-
-"display a warning if fileformat isnt unix
-set statusline+=%#warningmsg#
-set statusline+=%{&ff!='unix'?'['.&ff.']':''}
-set statusline+=%*
-
-"display a warning if file encoding isnt utf-8
-set statusline+=%#warningmsg#
-set statusline+=%{(&fenc!='utf-8'&&&fenc!='')?'['.&fenc.']':''}
-set statusline+=%*
-
-set statusline+=%h "help file flag
-set statusline+=%y\  "filetype
-set statusline+=%r "read only flag
-set statusline+=%m  "modified flag
-
-" display the filesize
-set statusline+=[%{FileSize()}]
-set statusline+=\
-" display current git branch
-set statusline+=%{fugitive#statusline()}
-set statusline+=\
-" display a warning with Syntastic, of validation errors and syntax checkers
-set statusline+=%#warningmsg#
-set statusline+=%*
-
-set statusline+=%=  "left/right separator
-
-set statusline+=%c, " cursor column
-set statusline+=%l/%L " cursor line/total lines
-set statusline+=\ %P\  " percent through file
+set statusline=%F%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[ASCII=\%03.3b][HEX=\%02.2B][FORMAT=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
 set laststatus=2  " always show status line
 
 function! FileSize()
