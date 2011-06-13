@@ -176,7 +176,7 @@ source $HOME/.vim/autocorrect.vim
 nmap <leader>n :NERDTreeToggle<CR>
 let g:NERDChristmasTree=1
 let g:NERDTreeDirArrows=1
-let g:NERDTreeQuitOnOpen=1
+"let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
 
 " Super Tab
@@ -204,16 +204,15 @@ let coffee_compile_on_save = 1
 "" LANGUAGE SPECIFIC
 
 " CSS
-au FileType css set expandtab tabstop=2 shiftwidth=2
+au FileType css set tabstop=2 shiftwidth=2
 
 " HTML
 au FileType html,xhtml set formatoptions+=tl
 au FileType html,xhtml set foldmethod=indent smartindent
-au FileType html,xhtml set expandtab tabstop=3 shiftwidth=3
-au FileType html,php,xhtml,jsp,ejs let b:delimitMate_matchpairs = "(:),[:],{:}"
+au FileType html,xhtml set tabstop=3 shiftwidth=3
 
 " Ruby
-au FileType ruby setlocal ts=2 sts=2 sw=2 expandtab foldmethod=syntax
+au FileType ruby setlocal ts=2 sts=2 sw=2 foldmethod=syntax
 
 " Python
 au FileType python set noexpandtab
@@ -227,15 +226,3 @@ au BufRead,BufNewFile *.json set ft=json
 set laststatus=2 " always hide the statusline
 set statusline=%F%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[ASCII=\%03.3b][HEX=\%02.2B][FORMAT=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
 set laststatus=2  " always show status line
-
-function! FileSize()
-	let bytes = getfsize(expand("%:p"))
-	if bytes <= 0
-	    return ""
-	endif
-	if bytes < 1024
-	    return bytes . " Bytes"
-	else
-	    return (bytes / 1024) . "kB"
-	endif
-endfunction

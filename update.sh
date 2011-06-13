@@ -50,7 +50,7 @@ echo "Creating .vim folders if necessary"
 mkdir -p $DOTVIM/{autoload,bundle}
 cd $DOTVIM/bundle/
 
-tpope_repos=(git surround unimpaired abolish repeat markdown ragtag fugitive)
+tpope_repos=(git unimpaired abolish markdown fugitive)
 
 for r in ${tpope_repos[*]}; do
     repo="vim-$r"
@@ -75,20 +75,11 @@ get_repo "altercation" "vim-colors-solarized"
 echo "Installing xoria256.vim"
 get_repo "guns" "xoria256.vim"
 
-echo "Installing vim-matchit"
-get_repo "mhz" "vim-matchit"
-
 echo "Installing ack.vim"
 get_repo "mileszs" "ack.vim"
 
 echo "Installing javascript.vim"
 get_repo "pangloss" "vim-javascript"
-
-echo "Installing haskell.vim"
-get_repo "vim-scripts" "haskell.vim"
-
-echo "Installing calendar-vim"
-get_repo "mattn" "calendar-vim"
 
 echo "Installing molokai.vim"
 get_repo "vim-scripts" "molokai"
@@ -99,23 +90,14 @@ get_repo "digitaltoad" "vim-jade"
 echo "Installing vim-stylus"
 get_repo "wavded" "vim-stylus"
 
-echo "Installing delimitMate"
-get_repo "Raimondi" "delimitMate"
-
 # echo "Installing neocomplcache"
 # get_repo "Shougo" "neocomplcache"
-
-echo "Installing supertab"
-get_repo "ervandew" "supertab"
 
 echo "Installing jshint"
 get_repo "walm" "jshint.vim"
 
 echo "Installing tabular"
 get_repo "godlygeek" "tabular"
-
-echo "Installing utl.vim"
-get_repo "vim-scripts" "utl.vim"
 
 echo "Installing vim-orgmode"
 get_repo "jceb" "vim-orgmode"
@@ -128,12 +110,6 @@ get_repo "kchmck" "vim-coffee-script"
 
 echo "Installing jellybeans"
 get_repo "nanotech" "jellybeans.vim"
-
-echo "Installing Command-T"
-get_repo "wincent" "Command-T"
-echo "Building Commant-T"
-cd $DOTVIM/bundle/Command-T
-rake make
 
 cd $DOTVIM/autoload
 echo "Fetching latest pathogen.vim"
