@@ -55,7 +55,7 @@ set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trail
 set nowrap							" no line wrapping
 set cpoptions+=$					" changed end with $ while typing
 set nu								" turn on line numbering
-set virtualedit=onemore				" alter virtual edit mode
+set virtualedit=block				" alter virtual edit mode
 set pastetoggle=<F3>				" set pastetoggle shortcut
 
 syntax enable						" enable syntax highlighting
@@ -65,7 +65,7 @@ syntax enable						" enable syntax highlighting
 if v:version >= 703
 	set undofile
 	set undodir=$HOME/.vim/.undo
-	"set colorcolumn=115			" show a right margin column
+	set colorcolumn=115			" show a right margin column
 endif
 
 " COLOR SCHEME
@@ -78,7 +78,7 @@ endif
 
 " FOLDING
 set foldenable						" enable folding
-set foldmethod=marker				" detect triple-{ style fold markers
+#set foldmethod=marker				" detect triple-{ style fold markers
 set foldlevel=99
 
 " ADDITIONAL KEY MAPPINGS
@@ -114,24 +114,22 @@ cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 " fast editing of the .vimrc
 nmap <silent> <leader>ev :e $MYVIMRC<cr>
 nmap <silent> <leader>sv :so $MYVIMRC<cr>
-" allow saving when you forgot sudo
-cmap w!! w !sudo tee % >/dev/null
 
 " create different delete key that maps to black hole
 nnoremap <C-X> "_d
 vnoremap <C-X> "_d
 " easily create new tabs
 nnoremap <C-T> :tabnew<CR>
+" easier movement between tabs
+nnoremap <C-N> :tabnext<CR>
+nnoremap <C-P> :tabprevious<CR>
+nnoremap <C-E> :NERDTree<CR>
 " shift screen buffer up, down and side to side
 nnoremap <C-J> 3<C-E>
 nnoremap <C-K> 3<C-Y>
 nnoremap <C-L> 3zl
 nnoremap <C-H> 3zh
-" easier movement between tabs
-nnoremap <C-N> :tabnext<CR>
-nnoremap <C-P> :tabprevious<CR>
-nnoremap <C-E> :NERDTree<CR>
-" set commands for different file types
+" execute shortcuts for specific filetypes
 command Node !node %
 nnoremap <Leader>ej :w<CR>:Node<Return>
 command Php5 !php5 %
@@ -176,7 +174,6 @@ source $HOME/.vim/autocorrect.vim
 nmap <leader>n :NERDTreeToggle<CR>
 let g:NERDChristmasTree=1
 let g:NERDTreeDirArrows=1
-"let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeShowHidden=1
 
 " Super Tab
