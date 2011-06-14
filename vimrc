@@ -78,7 +78,7 @@ endif
 
 " FOLDING
 set foldenable						" enable folding
-#set foldmethod=marker				" detect triple-{ style fold markers
+"set foldmethod=marker				" detect triple-{ style fold markers
 set foldlevel=99
 
 " ADDITIONAL KEY MAPPINGS

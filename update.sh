@@ -75,9 +75,6 @@ get_repo "msanders" "snipmate.vim"
 echo "Installing xmledit"
 get_repo "sukima" "xmledit"
 
-echo "Installing xoria256.vim"
-get_repo "guns" "xoria256.vim"
-
 echo "Installing ir_black"
 get_repo "wgibbs" "vim-irblack"
 
@@ -86,9 +83,6 @@ get_repo "mileszs" "ack.vim"
 
 echo "Installing javascript.vim"
 get_repo "pangloss" "vim-javascript"
-
-echo "Installing molokai.vim"
-get_repo "vim-scripts" "molokai"
 
 echo "Installing vim-jade"
 get_repo "digitaltoad" "vim-jade"
@@ -116,6 +110,12 @@ get_repo "kchmck" "vim-coffee-script"
 
 echo "Installing jellybeans"
 get_repo "nanotech" "jellybeans.vim"
+
+echo "Installing Command-T"
+get_repo "wincent" "Command-T"
+echo "Building Commant-T"
+cd $DOTVIM/bundle/Command-T
+rake make
 
 cd $DOTVIM/autoload
 echo "Fetching latest pathogen.vim"
