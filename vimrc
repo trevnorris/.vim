@@ -20,7 +20,7 @@ set wildmenu						" turn on WiLd menu
 set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
 set wildignore+=*.o,.git,.svn,node_modules
 
-set ruler							" always show current position
+"set ruler							" always show current position
 set backspace=indent,eol,start		" set backspace config, backspace as normal
 set nomodeline						" security
 set encoding=utf8
@@ -55,7 +55,7 @@ set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trail
 set nowrap							" no line wrapping
 set cpoptions+=$					" changed end with $ while typing
 set nu								" turn on line numbering
-set virtualedit=block				" alter virtual edit mode
+set virtualedit=onemore			" alter virtual edit mode
 set pastetoggle=<F3>				" set pastetoggle shortcut
 
 syntax enable						" enable syntax highlighting
@@ -91,12 +91,10 @@ imap <F1> <ESC>
 nnoremap <leader><space> :noh<cr>
 " map Y to match C and D behavior
 nnoremap Y y$
-" yank entire file (global yank)
-nmap gy ggVGy
 " fast window switching
 map <leader>, <C-W>w
 " cycle between buffers
-map <leader>. :b#<cr>
+map <leader>. :bn<cr>
 " change directory to current buffer
 map <leader>cd :cd %:p:h<cr>
 " swap implementations of ` and ' jump to prefer row and column jumping
@@ -157,12 +155,6 @@ if has("gui_running")
 	" crazy hack to get gvim to remove all scrollbars
 	set guioptions+=LlRrb
 	set guioptions-=LlRrb
-
-	if has("mac")
-	    set guifont=DejaVu\ Sans\ Mono\:h14
-	else
-	    set guifont=UbuntuBeta\ Mono\ 11
-	endif
 endif
 
 "" ABBREVIATIONS
