@@ -50,7 +50,7 @@ echo "Creating .vim folders if necessary"
 mkdir -p $DOTVIM/{autoload,bundle}
 cd $DOTVIM/bundle/
 
-tpope_repos=(git unimpaired abolish markdown fugitive)
+tpope_repos=(unimpaired abolish markdown fugitive)
 
 for r in ${tpope_repos[*]}; do
     repo="vim-$r"
@@ -66,12 +66,6 @@ get_repo "scrooloose" "nerdcommenter"
 echo "Installing ZenCoding"
 get_repo "mattn" "zencoding-vim"
 
-echo "Installing TComment"
-get_repo "tomtom" "tcomment_vim"
-
-echo "Installing snipMate"
-get_repo "msanders" "snipmate.vim"
-
 echo "Installing xmledit"
 get_repo "sukima" "xmledit"
 
@@ -84,14 +78,8 @@ get_repo "mileszs" "ack.vim"
 echo "Installing javascript.vim"
 get_repo "pangloss" "vim-javascript"
 
-echo "Installing vim-jade"
-get_repo "digitaltoad" "vim-jade"
-
 echo "Installing vim-stylus"
 get_repo "wavded" "vim-stylus"
-
-# echo "Installing neocomplcache"
-# get_repo "Shougo" "neocomplcache"
 
 echo "Installing jshint"
 get_repo "walm" "jshint.vim"
@@ -102,20 +90,18 @@ get_repo "godlygeek" "tabular"
 echo "Installing vim-orgmode"
 get_repo "jceb" "vim-orgmode"
 
-# echo "Installing VimOrganizer"
-# get_repo "hsitz" "VimOrganizer"
-
 echo "Installing coffee-script"
 get_repo "kchmck" "vim-coffee-script"
-
-echo "Installing jellybeans"
-get_repo "nanotech" "jellybeans.vim"
 
 echo "Installing Command-T"
 get_repo "wincent" "Command-T"
 echo "Building Commant-T"
 cd $DOTVIM/bundle/Command-T
-rake make
+# causes problems when using with rvm
+#rake make
+echo
+echo '!!! Remember to build Command-T with Ruby 1.8.6'
+echo
 
 cd $DOTVIM/autoload
 echo "Fetching latest pathogen.vim"

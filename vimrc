@@ -74,6 +74,7 @@ set background=dark
 colorscheme ir_black
 if has("gui_running")
 	colorscheme ir_black
+	set showtabline=2			" prevent full screen display issues
 endif
 
 " FOLDING
@@ -127,11 +128,12 @@ nnoremap <C-J> 3<C-E>
 nnoremap <C-K> 3<C-Y>
 nnoremap <C-L> 3zl
 nnoremap <C-H> 3zh
+
 " execute shortcuts for specific filetypes
 command Node !node %
-nnoremap <Leader>ej :w<CR>:Node<Return>
+nnoremap <Leader>ej :up<CR>:Node<CR>
 command Php5 !php5 %
-nnoremap <Leader>ep :w<CR>:Php5<Return>
+nnoremap <Leader>ep :up<CR>:Php5<CR>
 " macros for common entries
 noremap <Leader>dj oi/* debug:start */i/* debug:stop */kA
 noremap <Leader>dp oi/* debug:start */i/* debug:stop */kA
@@ -147,9 +149,9 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 
 if has("gui_running")
 	set guioptions-=T
-	set guioptions-=m
-	set linespace=6
-	set columns=170 lines=30
+	"set guioptions-=m
+	"set linespace=6
+	set columns=170 lines=45
 	set guioptions-=T
 
 	" crazy hack to get gvim to remove all scrollbars
@@ -167,9 +169,6 @@ nmap <leader>n :NERDTreeToggle<CR>
 let g:NERDChristmasTree=1
 let g:NERDTreeDirArrows=1
 let g:NERDTreeShowHidden=1
-
-" Super Tab
-" let g:SuperTabDefaultCompletionType = "context"
 
 " Unimpaired
 " bubble single lines
@@ -201,10 +200,10 @@ au FileType html,xhtml set foldmethod=indent smartindent
 au FileType html,xhtml set tabstop=3 shiftwidth=3
 
 " Ruby
-au FileType ruby setlocal ts=2 sts=2 sw=2 foldmethod=syntax
+au FileType ruby,eruby setlocal ts=2 sts=2 sw=2 expandtab foldmethod=syntax
 
 " Python
-au FileType python set noexpandtab
+au FileType python set
 
 " JavaScript
 au FileType javascript setlocal ts=4 sts=4 sw=4
@@ -214,4 +213,3 @@ au BufRead,BufNewFile *.json set ft=json
 
 set laststatus=2 " always hide the statusline
 set statusline=%F%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[ASCII=\%03.3b][HEX=\%02.2B][FORMAT=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
-set laststatus=2  " always show status line
