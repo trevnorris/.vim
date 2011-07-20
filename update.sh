@@ -93,6 +93,9 @@ get_repo "jceb" "vim-orgmode"
 echo "Installing coffee-script"
 get_repo "kchmck" "vim-coffee-script"
 
+echo "Installing WMGraphviz"
+get_repo "wannesm" "wmgraphviz.vim"
+
 echo "Installing Command-T"
 get_repo "wincent" "Command-T"
 echo "Building Commant-T"

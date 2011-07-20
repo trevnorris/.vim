@@ -7,7 +7,7 @@ silent! call pathogen#runtime_append_all_bundles()
 silent! call pathogen#helptags()
 filetype plugin indent on
 
-" MAP LEADER
+" MAP Leader
 noremap , \
 let mapleader = ","
 
@@ -84,20 +84,20 @@ set foldlevel=99
 
 " ADDITIONAL KEY MAPPINGS
 " fast saving
-nmap <leader>w :up<cr>
+nmap <Leader>w :up<cr>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
 imap <F1> <ESC>
 " clear highlight
-nnoremap <leader><space> :noh<cr>
+nnoremap <Leader><space> :noh<cr>
 " map Y to match C and D behavior
 nnoremap Y y$
 " fast window switching
-map <leader>, <C-W>w
+map <Leader>, <C-W>w
 " cycle between buffers
-map <leader>. :bn<cr>
+map <Leader>. :bn<cr>
 " change directory to current buffer
-map <leader>cd :cd %:p:h<cr>
+map <Leader>cd :cd %:p:h<cr>
 " swap implementations of ` and ' jump to prefer row and column jumping
 nnoremap ' `
 nnoremap ` '
@@ -105,14 +105,14 @@ nnoremap ` '
 vmap > >gv
 vmap < <gv
 " pull word under cursor into lhs of a substitute (for quick search and replace)
-nmap <leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
+nmap <Leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
-nnoremap <leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
+nnoremap <Leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
 " insert path of current file into a command
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
 " fast editing of the .vimrc
-nmap <silent> <leader>ev :e $MYVIMRC<cr>
-nmap <silent> <leader>sv :so $MYVIMRC<cr>
+nmap <silent> <Leader>ev :e $MYVIMRC<cr>
+nmap <silent> <Leader>sv :so $MYVIMRC<cr>
 
 " create different delete key that maps to black hole
 nnoremap <C-X> "_d
@@ -165,10 +165,14 @@ source $HOME/.vim/autocorrect.vim
 "" PLUGIN SETTINGS
 
 " NERDTree
-nmap <leader>n :NERDTreeToggle<CR>
+nmap <Leader>n :NERDTreeToggle<CR>
 let g:NERDChristmasTree=1
 let g:NERDTreeDirArrows=1
 let g:NERDTreeShowHidden=1
+
+" WMGraphviz
+let g:WMGraphviz_output="png"
+let g:WMGraphviz_viewer="eog"
 
 " Unimpaired
 " bubble single lines
@@ -183,7 +187,7 @@ let g:CommandTMaxHeight=20
 
 " Ack
 set grepprg=ack
-nnoremap <leader>a :Ack<space>
+nnoremap <Leader>a :Ack<space>
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
 " CoffeeScript
