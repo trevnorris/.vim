@@ -12,7 +12,7 @@ noremap , \
 let mapleader = ","
 
 " CONFIGURATION MAPPING
-set scrolloff=3						" show 3 lines of context around the cursor
+"set scrolloff=3						" show 3 lines of context around the cursor
 set autoread						" set to auto read when a file is changed from the outside
 set showcmd							" show typed commands
 
@@ -71,7 +71,7 @@ endif
 " COLOR SCHEME
 set t_Co=256
 set background=dark
-colorscheme ir_black
+colorscheme delek
 if has("gui_running")
 	colorscheme ir_black
 	set showtabline=2			" prevent full screen display issues
