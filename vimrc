@@ -138,6 +138,7 @@ nnoremap <Leader>ep :up<CR>:Php5<CR>
 " macros for common entries
 noremap <Leader>dj oi/* debug:start */i/* debug:stop */kA
 noremap <Leader>dp oi/* debug:start */i/* debug:stop */kA
+noremap <Leader>db oi# debug:start #i# debug:stop #kA
 
 "" ADDITIONAL AUTOCOMMANDS
 
@@ -185,6 +186,7 @@ vmap <C-Down> ]egv
 
 " Command-T
 let g:CommandTMaxHeight=20
+nnoremap <Leader>f :CommandTFlush<CR>
 
 " Ack
 set grepprg=ack
@@ -210,6 +212,9 @@ au FileType css set tabstop=2 shiftwidth=2
 au FileType html,xhtml set formatoptions+=tl
 au FileType html,xhtml set foldmethod=indent smartindent
 au FileType html,xhtml set tabstop=3 shiftwidth=3
+
+" Markdown
+au FileType markdown set expandtab
 
 "" STATUS LINE
 set laststatus=2 " always hide the statusline
