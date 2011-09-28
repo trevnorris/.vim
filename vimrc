@@ -12,16 +12,14 @@ noremap , \
 let mapleader = ","
 
 " CONFIGURATION MAPPING
-"set scrolloff=3						" show 3 lines of context around the cursor
 set autoread						" set to auto read when a file is changed from the outside
 set showcmd							" show typed commands
-set noexpandtab					" bad defalut behavior
+set noexpandtab						" bad defalut behavior
 
 set wildmenu						" turn on WiLd menu
 set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
 set wildignore+=*.o,.git,.svn,node_modules
 
-"set ruler							" always show current position
 set backspace=indent,eol,start		" set backspace config, backspace as normal
 set nomodeline						" security
 set encoding=utf8
@@ -30,7 +28,6 @@ set hlsearch						" highlight search things
 set incsearch						" go to search results as typing
 set smartcase						" but case-sensitive if expression contains a capital letter.
 set ignorecase						" ignore case when searching
-set gdefault						" assume global when searching or substituting
 set magic							" set magic on, for regular expressions
 set showmatch						" show matching brackets when text indicator is over them
 
@@ -56,7 +53,7 @@ set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trail
 set nowrap							" no line wrapping
 set cpoptions+=$					" changed end with $ while typing
 set nu								" turn on line numbering
-set virtualedit=onemore			" alter virtual edit mode
+set virtualedit=onemore				" alter virtual edit mode
 set pastetoggle=<F3>				" set pastetoggle shortcut
 
 syntax enable						" enable syntax highlighting
@@ -76,6 +73,7 @@ colorscheme delek
 if has("gui_running")
 	colorscheme ir_black
 	set showtabline=2			" prevent full screen display issues
+	set guifont="Driod Sans Mono 11","Liberation Mono 11","Monospace 10"
 endif
 
 " FOLDING
@@ -129,6 +127,8 @@ nnoremap <C-J> 3<C-E>
 nnoremap <C-K> 3<C-Y>
 nnoremap <C-L> 3zl
 nnoremap <C-H> 3zh
+" open file under cursor
+map gf :edit <cfile><CR>
 
 " execute shortcuts for specific filetypes
 command Node !node %
@@ -193,9 +193,6 @@ set grepprg=ack
 nnoremap <Leader>a :Ack<space>
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
-" CoffeeScript
-let coffee_compile_on_save = 1
-
 "" LANGUAGE SPECIFIC
 
 " Ruby
@@ -215,6 +212,9 @@ au FileType html,xhtml set tabstop=3 shiftwidth=3
 
 " Markdown
 au FileType markdown set expandtab
+
+" Normal Files
+au BufEnter *.txt,*.log set guifont="Arial 10"
 
 "" STATUS LINE
 set laststatus=2 " always hide the statusline

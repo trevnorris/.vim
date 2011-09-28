@@ -90,9 +90,6 @@ get_repo "godlygeek" "tabular"
 echo "Installing vim-orgmode"
 get_repo "jceb" "vim-orgmode"
 
-echo "Installing coffee-script"
-get_repo "kchmck" "vim-coffee-script"
-
 echo "Installing WMGraphviz"
 get_repo "wannesm" "wmgraphviz.vim"
 
