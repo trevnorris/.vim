@@ -184,9 +184,8 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-" Command-T
-let g:CommandTMaxHeight=20
-nnoremap <Leader>f :CommandTFlush<CR>
+" FuzzyFinder
+nnoremap <Leader>f :FufFile<CR>
 
 " Ack
 set grepprg=ack
