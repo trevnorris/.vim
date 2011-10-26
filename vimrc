@@ -14,22 +14,21 @@ let mapleader = ","
 " CONFIGURATION MAPPING
 set autoread						" set to auto read when a file is changed from the outside
 set showcmd							" show typed commands
-set noexpandtab						" bad defalut behavior
+set noexpandtab						" use tabs, not spaces
 
 set wildmenu						" turn on WiLd menu
-set wildmode=list:longest,list:full " activate TAB auto-completion for file paths
+set wildmode=list:longest,list:full	" activate TAB auto-completion for file paths
 set wildignore+=*.o,.git,.svn,node_modules
 
 set backspace=indent,eol,start		" set backspace config, backspace as normal
 set nomodeline						" security
 set encoding=utf8
 
-set hlsearch						" highlight search things
+set hlsearch						" highlight search terms
 set incsearch						" go to search results as typing
-set smartcase						" but case-sensitive if expression contains a capital letter.
 set ignorecase						" ignore case when searching
+set smartcase						" but case-sensitive if expression contains a capital letter.
 set magic							" set magic on, for regular expressions
-set showmatch						" show matching brackets when text indicator is over them
 
 set ttyfast							" improves redrawing for newer computers
 set fileformats=unix,mac,dos
@@ -40,16 +39,18 @@ set noswapfile
 set directory=~/.vim/.swp,/tmp		" swap directory
 set shiftwidth=4					" set tab width
 set softtabstop=4
-set tabstop=4
+set tabstop=4						" a tab is four spaces
 set smarttab
 set autoindent						" set automatic code indentation
-set hidden
+set hidden							" hide buffers without closing them
 
 set linebreak						" this will not break whole words while wrap is enabled
 set showbreak=…
 set cursorline						" highlight current line
-set list listchars=tab:\ \ ,trail:· " show · for trailing space, \ \ for trailing tab
+set list listchars=tab:\ \ ,trail:·
 
+set visualbell						" no beeping
+set noerrorbells					" no beeping
 set nowrap							" no line wrapping
 set cpoptions+=$					" changed end with $ while typing
 set nu								" turn on line numbering
@@ -63,7 +64,7 @@ syntax enable						" enable syntax highlighting
 if v:version >= 703
 	set undofile
 	set undodir=$HOME/.vim/.undo
-	set colorcolumn=115			" show a right margin column
+	set colorcolumn=115				" show a right margin column
 endif
 
 " COLOR SCHEME
@@ -72,8 +73,8 @@ set background=dark
 colorscheme delek
 if has("gui_running")
 	colorscheme ir_black
-	set showtabline=2			" prevent full screen display issues
-	set guifont="Driod Sans Mono 11","Liberation Mono 11","Monospace 10"
+	set showtabline=2				" prevent full screen display issues
+	set guifont=Droid\ Sans\ Mono\ 11,Liberation\ Mono\ 11,Monospace\ 10
 endif
 
 " FOLDING
@@ -137,8 +138,8 @@ command Php5 !php5 %
 nnoremap <Leader>ep :up<CR>:Php5<CR>
 " macros for common entries
 noremap <Leader>dj oi/* debug:start */i/* debug:stop */kA
-noremap <Leader>dp oi/* debug:start */i/* debug:stop */kA
 noremap <Leader>db oi# debug:start #i# debug:stop #kA
+noremap <Leader>dh oi<!-- debug:start -->i<!-- debug:stop -->kA
 
 "" ADDITIONAL AUTOCOMMANDS
 
@@ -151,9 +152,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'
 
 if has("gui_running")
 	set guioptions-=T
-	"set guioptions-=m
-	"set linespace=6
-	set columns=170 lines=45
+	set columns=130 lines=45
 	set guioptions-=T
 
 	" crazy hack to get gvim to remove all scrollbars
@@ -165,6 +164,10 @@ endif
 source $HOME/.vim/autocorrect.vim
 
 "" PLUGIN SETTINGS
+
+" Indent Guide
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
 
 " NERDTree
 nmap <Leader>n :NERDTreeToggle<CR>
@@ -186,6 +189,7 @@ vmap <C-Down> ]egv
 
 " FuzzyFinder
 nnoremap <Leader>f :FufFile<CR>
+nnoremap <Leader>b :FufBuffer<CR>
 
 " Ack
 set grepprg=ack

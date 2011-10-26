@@ -99,6 +99,9 @@ get_repo "clones" "vim-l9"
 echo "Installing FuzzyFinder"
 get_repo "clones" "vim-fuzzyfinder"
 
+echo "Installing Indent Guide"
+get_repo "nathanaelkane" "vim-indent-guides"
+
 cd $DOTVIM/autoload
 echo "Fetching latest pathogen.vim"
 rm pathogen.vim
