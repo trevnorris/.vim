@@ -93,15 +93,11 @@ get_repo "jceb" "vim-orgmode"
 echo "Installing WMGraphviz"
 get_repo "wannesm" "wmgraphviz.vim"
 
-echo "Installing Command-T"
-get_repo "wincent" "Command-T"
-echo "Building Commant-T"
-cd $DOTVIM/bundle/Command-T
-# causes problems when using with rvm
-#rake make
-echo
-echo '!!! Remember to build Command-T with Ruby 1.8.6'
-echo
+echo "Installing L9"
+get_repo "clones" "vim-l9"
+
+echo "Installing FuzzyFinder"
+get_repo "clones" "vim-fuzzyfinder"
 
 cd $DOTVIM/autoload
 echo "Fetching latest pathogen.vim"
