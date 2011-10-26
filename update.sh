@@ -25,7 +25,7 @@ get_repo() {
         cd ..
     else
         echo "Cloning repo for $repo"
-        git clone git://github.com/$gh_user/$repo.git
+        git clone https://github.com/$gh_user/$repo.git
     fi
 }
 
