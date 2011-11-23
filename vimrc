@@ -214,7 +214,7 @@ au FileType html,xhtml set foldmethod=indent smartindent
 au FileType html,xhtml set tabstop=3 shiftwidth=3
 
 " Markdown
-au FileType markdown set expandtab
+"au FileType markdown set expandtab
 
 " Normal Files
 au BufEnter *.txt,*.log set guifont="Arial 10"
