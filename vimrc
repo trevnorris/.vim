@@ -72,6 +72,7 @@ set t_Co=256
 set background=dark
 colorscheme delek
 if has("gui_running")
+	set list listchars=tab:\⁚\ ,trail:·
 	colorscheme ir_black
 	set showtabline=2				" prevent full screen display issues
 	set guifont=Droid\ Sans\ Mono\ 11,Liberation\ Mono\ 11,Monospace\ 10
@@ -190,6 +191,7 @@ vmap <C-Down> ]egv
 " FuzzyFinder
 nnoremap <Leader>f :FufFile<CR>
 nnoremap <Leader>b :FufBuffer<CR>
+nnoremap <Leader>r :FufRenewCache<CR>
 
 " Ack
 set grepprg=ack
@@ -215,9 +217,6 @@ au FileType html,xhtml set tabstop=3 shiftwidth=3
 
 " Markdown
 "au FileType markdown set expandtab
-
-" Normal Files
-au BufEnter *.txt,*.log set guifont="Arial 10"
 
 "" STATUS LINE
 set laststatus=2 " always hide the statusline
