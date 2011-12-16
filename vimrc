@@ -198,6 +198,9 @@ set grepprg=ack
 nnoremap <Leader>a :Ack<space>
 let g:ackprg="ack-grep -H --nocolor --nogroup --column"
 
+" Highligh all matching words under cursor
+au CursorMoved * silent! exe printf('match IncSearch /\<%s\>/', expand('<cword>'))
+
 "" LANGUAGE SPECIFIC
 
 " Ruby
