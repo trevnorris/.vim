@@ -95,7 +95,8 @@ set foldlevel=99
 " swap implementations of ` and ' jump to prefer row and column jumping
 nnoremap ' `
 nnoremap ` '
-" quick leave insert mode using <C-Space
+" quick leave insert mode using <C-Space>
+imap <C-Space> <ESC>
 imap <Nul> <ESC>
 " fast saving
 nmap <Leader>s :up<cr>
