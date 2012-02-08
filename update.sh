@@ -102,6 +102,12 @@ get_repo "clones" "vim-fuzzyfinder"
 echo "Installing Indent Guide"
 get_repo "nathanaelkane" "vim-indent-guides"
 
+if [ -o `which curl` ]
+then
+	echo 'ERROR: curl not installed, cannot install pathogen'
+	exit 1
+fi
+
 cd $DOTVIM/autoload
 echo "Fetching latest pathogen.vim"
 rm pathogen.vim
