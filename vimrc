@@ -98,8 +98,10 @@ nnoremap ` '
 " quick leave insert mode using <C-Space>
 imap <C-Space> <ESC>
 imap <Nul> <ESC>
+vmap <C-Space> <ESC>
+vmap <Nul> <ESC>
 " fast saving
-nmap <Leader>s :up<cr>
+nnoremap <Leader>s :up<cr>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
 imap <F1> <ESC>
