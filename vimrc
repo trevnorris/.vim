@@ -44,6 +44,7 @@ set directory=~/.vim/.swp,/tmp      " swap directory
 set hidden                          " hide buffers without closing them
 
 set linebreak                       " this will not break whole words while wrap is enabled
+set nolist                          " when line break is enabled, don't break on words
 set showbreak=…
 set cursorline                      " highlight current line
 set list listchars=tab:\ \ ,trail:·
