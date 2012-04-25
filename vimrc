@@ -124,9 +124,6 @@ nmap <Leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <Leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
 
-" create different delete key that maps to black hole
-nnoremap <C-X> "_d
-vnoremap <C-X> "_d
 " easily create new tabs
 nnoremap <C-T> :tabnew<CR>
 " easier movement between tabs
@@ -174,7 +171,7 @@ let g:NERDTreeShowHidden=1
 
 " WMGraphviz
 let g:WMGraphviz_output="png"
-let g:WMGraphviz_viewer="eog"
+let g:WMGraphviz_viewer="ristretto"
 
 " Unimpaired
 " bubble single lines
@@ -204,6 +201,7 @@ au CursorMoved * silent! exe printf('match VisualNOS /\<%s\>/', expand('<cword>'
 au FileType ruby,eruby set ts=2 sts=2 sw=2 foldmethod=syntax
 
 " JavaScript
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au FileType javascript set ts=4 sts=4 sw=4
 au BufRead,BufNewFile *.json set ft=json
 
