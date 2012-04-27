@@ -124,12 +124,6 @@ nmap <Leader>r :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <Leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
 
-" easily create new tabs
-nnoremap <C-T> :tabnew<CR>
-" easier movement between tabs
-nnoremap <C-N> :tabnext<CR>
-nnoremap <C-P> :tabprevious<CR>
-nnoremap <C-E> :NERDTree<CR>
 " shift screen buffer up, down and side to side
 nnoremap <C-J> 3<C-E>
 nnoremap <C-K> 3<C-Y>

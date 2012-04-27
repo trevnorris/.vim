@@ -57,9 +57,6 @@ for r in ${tpope_repos[*]}; do
     get_repo "tpope" $repo
 done
 
-echo "Installing NerdTree"
-get_repo "scrooloose" "nerdtree"
-
 echo "Installing NerdCommenter"
 get_repo "scrooloose" "nerdcommenter"
 
