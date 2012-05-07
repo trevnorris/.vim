@@ -130,6 +130,10 @@ nnoremap <C-K> 3<C-Y>
 nnoremap <C-L> 3zl
 nnoremap <C-H> 3zh
 
+" easier movement when text lines wrap
+nnoremap k gk
+nnoremap j gj
+
 " execute shortcuts for specific filetypes
 command! Node !node %
 nnoremap <Leader>ej :up<CR>:Node<CR>
@@ -212,4 +216,4 @@ au FileType html,xhtml set tabstop=3 shiftwidth=3
 
 "" STATUS LINE
 set laststatus=2 " always hide the statusline
-set statusline=%F%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[ASCII=\%03.3b][HEX=\%02.2B][FORMAT=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
+set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
