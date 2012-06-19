@@ -64,7 +64,7 @@ syntax enable                       " enable syntax highlighting
 if v:version >= 703
   set undofile
   set undodir=$HOME/.vim/.undo
-  set colorcolumn=115             " show a right margin column
+  set colorcolumn=80             " show a right margin column
 endif
 
 " COLOR SCHEME
