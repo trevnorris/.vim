@@ -42,6 +42,7 @@ set nowritebackup
 set noswapfile
 set directory=~/.vim/.swp,/tmp      " swap directory
 set hidden                          " hide buffers without closing them
+set viminfo='1000,<0,@0,/0          " don't remember things that can compromise data
 
 set linebreak                       " this will not break whole words while wrap is enabled
 set nolist                          " when line break is enabled, don't break on words
