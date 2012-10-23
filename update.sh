@@ -73,7 +73,7 @@ echo "Installing ack.vim"
 get_repo "mileszs" "ack.vim"
 
 echo "Installing javascript.vim"
-get_repo "pangloss" "vim-javascript"
+get_repo "trevnorris" "vim-javascript"
 
 echo "Installing vim-stylus"
 get_repo "wavded" "vim-stylus"
