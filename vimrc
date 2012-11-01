@@ -15,9 +15,9 @@ let mapleader = ","
 set autoread                        " set to auto read when a file is changed from the outside
 set showcmd                         " show typed commands
 set noexpandtab                     " use tabs, not spaces
-set shiftwidth=4                    " set tab width
-set tabstop=4                       " a tab is four spaces
-set softtabstop=4
+set shiftwidth=8                    " set tab width
+set tabstop=8                       " a tab is four spaces
+set softtabstop=8
 set smarttab                        " align space-tabs
 set autoindent                      " set automatic code indentation
 
@@ -140,8 +140,10 @@ nnoremap j gj
 " execute shortcuts for specific filetypes
 command! Node !node --harmony %
 nnoremap <Leader>ej :up<CR>:Node<CR>
-command! Php5 !php5 %
-nnoremap <Leader>ep :up<CR>:Php5<CR>
+command! CPP !clang++ % -o %:r
+nnoremap <Leader>bc :up<CR>:CPP<CR>
+command! ExecCPP !./%:r
+nnoremap <Leader>ec :ExecCPP<CR>
 " macros for debugging in commonly used languages
 noremap <Leader>dj oi/* debug:start */i/* debug:stop */kA
 noremap <Leader>db oi# debug:start #i# debug:stop #kA
@@ -188,7 +190,6 @@ au CursorMoved * silent! exe printf('match VisualNOS /\<%s\>/', expand('<cword>'
 
 " JavaScript
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-au FileType javascript set ts=4 sts=4 sw=4
 au BufRead,BufNewFile *.json set ft=json
 
 " HTML
