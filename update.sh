@@ -69,11 +69,11 @@ get_repo "sukima" "xmledit"
 echo "Installing ir_black"
 get_repo "wgibbs" "vim-irblack"
 
-echo "Installing ack.vim"
-get_repo "mileszs" "ack.vim"
-
 echo "Installing javascript.vim"
 get_repo "trevnorris" "vim-javascript"
+
+echo "Installing Node dictionary"
+get_repo "guileen" "vim-node"
 
 echo "Installing vim-stylus"
 get_repo "wavded" "vim-stylus"
