@@ -15,9 +15,9 @@ let mapleader = ","
 set autoread                        " set to auto read when a file is changed from the outside
 set showcmd                         " show typed commands
 set noexpandtab                     " use tabs, not spaces
-set shiftwidth=8                    " set tab width
-set tabstop=8                       " a tab is four spaces
-set softtabstop=8
+set shiftwidth=4                    " set tab width
+set tabstop=4                       " a tab is four spaces
+set softtabstop=4
 set smarttab                        " align space-tabs
 set autoindent                      " set automatic code indentation
 
@@ -31,7 +31,6 @@ set encoding=utf8                   " default encoding for all files
 
 set hlsearch                        " highlight search terms
 set incsearch                       " go to search results as typing
-set ignorecase                      " ignore case when searching
 set smartcase                       " but case-sensitive if expression contains a capital letter.
 
 set ttyfast                         " improves redrawing for newer computers
@@ -72,8 +71,9 @@ endif
 set t_Co=256
 set background=dark
 colorscheme delek
+set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
 if has("gui_running")
-  set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
+  "set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
   colorscheme ir_black
   set showtabline=2                 " prevent full screen display issues
   set guifont=Droid\ Sans\ Mono\ 11,Liberation\ Mono\ 11,Monospace\ 10
@@ -138,7 +138,7 @@ nnoremap k gk
 nnoremap j gj
 
 " execute shortcuts for specific filetypes
-command! Node !node --harmony %
+command! Node !node %
 nnoremap <Leader>ej :up<CR>:Node<CR>
 command! CPP !clang++ % -o %:r
 nnoremap <Leader>bc :up<CR>:CPP<CR>
@@ -190,7 +190,8 @@ au CursorMoved * silent! exe printf('match VisualNOS /\<%s\>/', expand('<cword>'
 
 " JavaScript
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-au BufRead,BufNewFile *.json set ft=json
+au BufRead,BufNewFile *.json set ft=javascript
+au BufRead,BufNewFile *.gyp set ft=javascript
 
 " HTML
 au FileType html,xhtml set formatoptions+=tl
