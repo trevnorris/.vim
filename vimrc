@@ -191,7 +191,7 @@ au CursorMoved * silent! exe printf('match VisualNOS /\<%s\>/', expand('<cword>'
 " JavaScript
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au BufRead,BufNewFile *.json set ft=javascript
-au BufRead,BufNewFile *.gyp set ft=javascript
+au BufRead,BufNewFile *.gyp set ft=sh
 
 " HTML
 au FileType html,xhtml set formatoptions+=tl
@@ -203,3 +203,8 @@ au FileType html,xhtml set smartindent
 "" STATUS LINE
 set laststatus=2 " always hide the statusline
 set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
+
+
+" Path options
+autocmd BufRead,BufNewFile /var/projects/node/* set et ts=2 sw=2
+autocmd BufRead,BufNewFile /var/projects/node-trevnorris/* set et ts=2 sw=2
