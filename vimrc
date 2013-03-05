@@ -208,3 +208,4 @@ set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]
 " Path options
 autocmd BufRead,BufNewFile /var/projects/node/* set et ts=2 sw=2
 autocmd BufRead,BufNewFile /var/projects/node-trevnorris/* set et ts=2 sw=2
+autocmd BufRead,BufNewFile /var/projects/node-timer/* set et ts=2 sw=2
