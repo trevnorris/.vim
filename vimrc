@@ -92,6 +92,8 @@ endif
 " FOLDING
 set foldenable                    " enable folding
 set foldlevel=99
+" for quick folding all top level functions
+:nmap <F6> :g/\v^}$/;norm zf%<CR>
 
 " ADDITIONAL KEY MAPPINGS
 " swap implementations of ` and ' jump to prefer row and column jumping
@@ -209,3 +211,5 @@ set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]
 autocmd BufRead,BufNewFile /var/projects/node/* set et ts=2 sw=2
 autocmd BufRead,BufNewFile /var/projects/node-trevnorris/* set et ts=2 sw=2
 autocmd BufRead,BufNewFile /var/projects/node-timer/* set et ts=2 sw=2
+autocmd BufRead,BufNewFile /var/projects/v8/* set et ts=2 sw=2
+autocmd BufRead,BufNewFile /var/projects/smbuffer/* set et ts=2 sw=2
