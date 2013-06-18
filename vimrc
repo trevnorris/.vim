@@ -14,10 +14,14 @@ let mapleader = ","
 " CONFIGURATION MAPPING
 set autoread                        " set to auto read when a file is changed from the outside
 set showcmd                         " show typed commands
-set noexpandtab                     " use tabs, not spaces
-set shiftwidth=4                    " set tab width
-set tabstop=4                       " a tab is four spaces
-set softtabstop=4
+set expandtab                     " use tabs, not spaces
+set shiftwidth=2                    " set tab width
+set tabstop=2                       " a tab is four spaces
+set softtabstop=2
+"set noexpandtab                     " use tabs, not spaces
+"set shiftwidth=4                    " set tab width
+"set tabstop=4                       " a tab is four spaces
+"set softtabstop=4
 set smarttab                        " align space-tabs
 set autoindent                      " set automatic code indentation
 
@@ -208,8 +212,8 @@ set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]
 
 
 " Path options
-autocmd BufRead,BufNewFile /var/projects/node/* set et ts=2 sw=2
-autocmd BufRead,BufNewFile /var/projects/node-trevnorris/* set et ts=2 sw=2
-autocmd BufRead,BufNewFile /var/projects/node-timer/* set et ts=2 sw=2
-autocmd BufRead,BufNewFile /var/projects/v8/* set et ts=2 sw=2
-autocmd BufRead,BufNewFile /var/projects/smbuffer/* set et ts=2 sw=2
+"autocmd BufRead,BufNewFile /var/projects/node/* set et ts=2 sw=2
+"autocmd BufRead,BufNewFile /var/projects/node-trevnorris/* set et ts=2 sw=2
+"autocmd BufRead,BufNewFile /var/projects/node-timer/* set et ts=2 sw=2
+"autocmd BufRead,BufNewFile /var/projects/v8/* set et ts=2 sw=2
+"autocmd BufRead,BufNewFile /var/projects/smbuffer/* set et ts=2 sw=2
