@@ -60,14 +60,14 @@ done
 echo "Installing NerdCommenter"
 get_repo "scrooloose" "nerdcommenter"
 
+echo "Installing ColorSchemes"
+get_repo "flazz" "vim-colorschemes"
+
 echo "Installing ZenCoding"
 get_repo "mattn" "zencoding-vim"
 
 echo "Installing xmledit"
 get_repo "sukima" "xmledit"
-
-echo "Installing ir_black"
-get_repo "wgibbs" "vim-irblack"
 
 echo "Installing javascript.vim"
 get_repo "trevnorris" "vim-javascript"
