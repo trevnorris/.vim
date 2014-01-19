@@ -98,6 +98,8 @@ set foldenable                    " enable folding
 set foldlevel=99
 " for quick folding all top level functions
 :nmap <F6> :g/\v^}$/;norm zf%<CR>
+" jump to end of line and fold
+:nmap <F5> $zf%
 
 " ADDITIONAL KEY MAPPINGS
 " swap implementations of ` and ' jump to prefer row and column jumping

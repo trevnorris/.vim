@@ -70,7 +70,7 @@ echo "Installing xmledit"
 get_repo "sukima" "xmledit"
 
 echo "Installing javascript.vim"
-get_repo "trevnorris" "vim-javascript"
+get_repo "trevnorris" "vim-javascript-syntax"
 
 echo "Installing Node dictionary"
 get_repo "guileen" "vim-node"
