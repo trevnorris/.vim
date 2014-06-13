@@ -61,6 +61,8 @@ set nu                              " turn on line numbering
 set virtualedit=onemore             " alter virtual edit mode
 set pastetoggle=<F3>                " set pastetoggle shortcut
 
+"set textwidth=80                    " Always force wrap code at 80 characters
+
 syntax enable                       " enable syntax highlighting
 
 " VIM 7.3 FEATURES
