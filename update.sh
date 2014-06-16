@@ -63,9 +63,6 @@ get_repo "scrooloose" "nerdcommenter"
 echo "Installing ColorSchemes"
 get_repo "flazz" "vim-colorschemes"
 
-echo "Installing ZenCoding"
-get_repo "mattn" "zencoding-vim"
-
 echo "Installing xmledit"
 get_repo "sukima" "xmledit"
 
