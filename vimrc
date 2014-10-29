@@ -3,8 +3,8 @@ set nocompatible
 
 " PATHOGEN
 filetype off
-silent! call pathogen#runtime_append_all_bundles()
 silent! call pathogen#helptags()
+silent! call pathogen#infect()
 filetype plugin indent on
 
 " MAP <Leader>
@@ -213,6 +213,10 @@ au FileType html,xhtml set smartindent
 "" STATUS LINE
 set laststatus=2 " always hide the statusline
 set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
+
+
+" highlight ExtraWhitespace ctermbg=red guibg=red
+" autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
 
 
 " Path options
