@@ -96,6 +96,12 @@ get_repo "clones" "vim-fuzzyfinder"
 echo "Installing Indent Guide"
 get_repo "nathanaelkane" "vim-indent-guides"
 
+#echo "Installing YouCompleteMe"
+#get_repo "Valloric" "YouCompleteMe"
+
+#echo "Installing TernJS"
+#get_repo "marijnh" "tern_for_vim"
+
 if [ -o `which curl` ]
 then
 	echo 'ERROR: curl not installed, cannot install pathogen'
@@ -106,15 +112,3 @@ cd $DOTVIM/autoload
 echo "Fetching latest pathogen.vim"
 rm pathogen.vim
 curl -O https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
-
-echo "Checking to see if pathogen has already been added to .vimrc"
-pathogen_cmd="call pathogen#runtime_append_all_bundles()"
-contains=`grep "$pathogen_cmd" ~/.vimrc | wc -l`
-
-if [ $contains == 0 ]
-then
-    echo "Hasn't been added, adding now."
-    echo "$pathogen_cmd" >> ~/.vimrc
-else
-    echo "It was already added. Good to go"
-fi

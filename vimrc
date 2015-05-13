@@ -57,7 +57,7 @@ set visualbell                      " no beeping
 set noerrorbells                    " no beeping
 set nowrap                          " no default line wrapping
 set cpoptions+=$                    " changed end with $ while typing
-set nu                              " turn on line numbering
+"set nu                              " turn on line numbering
 set virtualedit=onemore             " alter virtual edit mode
 set pastetoggle=<F3>                " set pastetoggle shortcut
 
@@ -76,7 +76,7 @@ endif
 " COLOR SCHEME
 set t_Co=256
 set background=dark
-colorscheme delek
+colorscheme distinguished
 set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
 if has("gui_running")
   "set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
@@ -115,7 +115,7 @@ inoremap <Nul> <ESC>
 vnoremap <C-Space> <ESC>
 vnoremap <Nul> <ESC>
 " fast saving
-nnoremap <Leader>s :up<cr>
+nnoremap <Leader>s :up<CR>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
 imap <F1> <ESC>
@@ -126,16 +126,17 @@ nnoremap Y y$
 " fast window switching
 map <Leader>, <C-W>w
 " cycle between buffers
-map <Leader>. :bn<cr>
+map <Leader>. :bn<CR>
+map <Leader>m :bp<CR>
 " change directory to current buffer
-map <Leader>cd :cd %:p:h<cr>
+map <Leader>cd :cd %:p:h<CR>
 " indent visual selected code without unselecting and going back to normal mode
 vmap > >gv
 vmap < <gv
 " pull word under cursor into lhs of a substitute (for quick search and replace)
 nmap <Leader>R :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
-nnoremap <Leader>W :%s/\s\+$//e<cr>:let @/=''<CR>
+nnoremap <Leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
 
 " shift screen buffer up, down and side to side
 nnoremap <C-J> 3<C-E>
