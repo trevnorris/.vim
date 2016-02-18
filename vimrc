@@ -181,16 +181,8 @@ let g:indent_guides_guide_size=1
 let g:WMGraphviz_output="png"
 let g:WMGraphviz_viewer="ristretto"
 
-" Unimpaired
-" bubble single lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-" bubble multiple lines
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
-
 " FuzzyFinder
-nnoremap <Leader>f :FufFile<CR>
+nnoremap <Leader>i :FufFile<CR>
 nnoremap <Leader>b :FufBuffer<CR>
 nnoremap <Leader>r :FufRenewCache<CR>
 
