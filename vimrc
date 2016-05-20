@@ -45,7 +45,7 @@ set noswapfile                      " no need for swap files
 set directory=~/.vim/.swp,/tmp      " swap directory, just in case
 set hidden                          " hide buffers without closing them
 set viminfo='1000,<0,@0,/0          " don't remember things that can compromise data
-set cryptmethod=blowfish            " zip encryption sucks, use blowfish
+set cryptmethod=blowfish2           " zip encryption sucks, use blowfish
 
 set linebreak                       " this will not break whole words while wrap is enabled
 set nolist                          " when line break is enabled, don't break on words
@@ -116,6 +116,7 @@ vnoremap <C-Space> <ESC>
 vnoremap <Nul> <ESC>
 " fast saving
 nnoremap <Leader>s :up<CR>
+inoremap <F2> <C-o>:w<cr>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
 imap <F1> <ESC>
@@ -159,6 +160,8 @@ nnoremap <Leader>ec :ExecCPP<CR>
 noremap <Leader>dj oi/* debug:start */i/* debug:stop */kA
 noremap <Leader>db oi# debug:start #i# debug:stop #kA
 noremap <Leader>dh oi<!-- debug:start -->i<!-- debug:stop -->kA
+" macro for starting new JS files
+noremap <Leader>js i'use strict';const print = process._rawDebug;O
 
 "" ADDITIONAL AUTOCOMMANDS
 
@@ -206,7 +209,6 @@ au FileType html,xhtml set smartindent
 "" STATUS LINE
 set laststatus=2 " always hide the statusline
 set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
-
 
 " highlight ExtraWhitespace ctermbg=red guibg=red
 " autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
