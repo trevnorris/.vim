@@ -78,6 +78,9 @@ get_repo "wavded" "vim-stylus"
 echo "Installing jshint"
 get_repo "walm" "jshint.vim"
 
+echo "Installing tern_for_vim"
+get_repo "ternjs" "tern_for_vim"
+
 echo "Installing tabular"
 get_repo "godlygeek" "tabular"
 

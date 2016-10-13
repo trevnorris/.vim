@@ -60,6 +60,9 @@ set cpoptions+=$                    " changed end with $ while typing
 "set nu                              " turn on line numbering
 set virtualedit=onemore             " alter virtual edit mode
 set pastetoggle=<F3>                " set pastetoggle shortcut
+set tags=./tags;,tags;              " better tags file search order
+
+set scrolloff=3                     " force lines on top and bottom
 
 "set textwidth=80                    " Always force wrap code at 80 characters
 
@@ -138,6 +141,9 @@ vmap < <gv
 nmap <Leader>R :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <Leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
+
+" Generate ctags file in root of git repo from current directory
+nnoremap <Leader>ct :!ctags -f $(git rev-parse --show-cdup)/tags -R .<CR><CR>
 
 " shift screen buffer up, down and side to side
 nnoremap <C-J> 3<C-E>
