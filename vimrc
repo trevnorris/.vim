@@ -14,9 +14,9 @@ let mapleader = ","
 " CONFIGURATION MAPPING
 set autoread                        " set to auto read when a file is changed from the outside
 set showcmd                         " show typed commands
-set expandtab                     " use tabs, not spaces
+set expandtab                       " use spaces, not tabs
 set shiftwidth=2                    " set tab width
-set tabstop=2                       " a tab is four spaces
+set tabstop=2                       " a tab is two spaces
 set softtabstop=2
 "set noexpandtab                     " use tabs, not spaces
 "set shiftwidth=4                    " set tab width
@@ -67,6 +67,8 @@ set scrolloff=3                     " force lines on top and bottom
 "set textwidth=80                    " Always force wrap code at 80 characters
 
 syntax enable                       " enable syntax highlighting
+
+"set timeoutlen=250 ttimeoutlen=0   " set more usable timeouts for keys
 
 " VIM 7.3 FEATURES
 
@@ -141,6 +143,8 @@ vmap < <gv
 nmap <Leader>R :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <Leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
+" remove everything between and including debug:start/debug:stop
+nnoremap <Leader>D :bufdo g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>
 
 " Generate ctags file in root of git repo from current directory
 nnoremap <Leader>ct :!ctags -f $(git rev-parse --show-cdup)/tags -R .<CR><CR>
@@ -193,6 +197,7 @@ let g:WMGraphviz_viewer="ristretto"
 " FuzzyFinder
 nnoremap <Leader>i :FufFile<CR>
 nnoremap <Leader>b :FufBuffer<CR>
+nnoremap <Leader>t :FufTag<CR>
 nnoremap <Leader>r :FufRenewCache<CR>
 
 " Highligh all matching words under cursor
@@ -226,3 +231,25 @@ set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]
 "autocmd BufRead,BufNewFile /var/projects/node-timer/* set et ts=2 sw=2
 "autocmd BufRead,BufNewFile /var/projects/v8/* set et ts=2 sw=2
 "autocmd BufRead,BufNewFile /var/projects/smbuffer/* set et ts=2 sw=2
+
+nnoremap <Leader>su :AABu<CR>
+nnoremap <Leader>sd :AABd<CR>
+
+command! AABu execute ":normal!" AwesomeBlockBoundry(-1)."G"
+command! AABd execute ":normal!" AwesomeBlockBoundry(1)."G"
+
+function! AwesomeBlockBoundry(direction)
+  let drctn = a:direction
+  let next_line = line('.')
+  let original_indent = indent(next_line)
+
+  while ((next_line >= 1) && (next_line <= line('$')))
+    let next_line = next_line + drctn
+    if (indent(next_line) < original_indent) &&
+        \ (match(getline(next_line), "^\\s*$") == -1) ||
+        \ (match(getline(next_line), "^\S") == 0)
+      break
+    endif
+  endwhile
+  return next_line
+endfunction

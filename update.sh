@@ -99,6 +99,9 @@ get_repo "clones" "vim-fuzzyfinder"
 echo "Installing Indent Guide"
 get_repo "nathanaelkane" "vim-indent-guides"
 
+echo "Installing vim-obsession"
+get_repo "tpope" "vim-obsession"
+
 #echo "Installing YouCompleteMe"
 #get_repo "Valloric" "YouCompleteMe"
 
