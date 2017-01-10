@@ -8,6 +8,8 @@ silent! call pathogen#infect()
 filetype plugin indent on
 
 " MAP <Leader>
+" NOTE: if there is delay in a key combo use :verbose noremap <leader>(key) to
+" see what's bound to it, and make sure it's the only mapping to that key.
 noremap , \
 let mapleader = ","
 
@@ -66,9 +68,9 @@ set scrolloff=3                     " force lines on top and bottom
 
 "set textwidth=80                    " Always force wrap code at 80 characters
 
-syntax enable                       " enable syntax highlighting
+"set timeoutlen=750 ttimeoutlen=0   " set better timeouts
 
-"set timeoutlen=250 ttimeoutlen=0   " set more usable timeouts for keys
+syntax enable                       " enable syntax highlighting
 
 " VIM 7.3 FEATURES
 
@@ -144,7 +146,7 @@ nmap <Leader>R :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <Leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
 " remove everything between and including debug:start/debug:stop
-nnoremap <Leader>D :bufdo g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>
+nnoremap <Leader>D :silent g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>
 
 " Generate ctags file in root of git repo from current directory
 nnoremap <Leader>ct :!ctags -f $(git rev-parse --show-cdup)/tags -R .<CR><CR>
@@ -159,13 +161,6 @@ nnoremap <C-H> 3zh
 nnoremap k gk
 nnoremap j gj
 
-" execute shortcuts for specific filetypes
-command! Node !node %
-nnoremap <Leader>ej :up<CR>:Node<CR>
-command! CPP !clang++ % -o %:r
-nnoremap <Leader>bc :up<CR>:CPP<CR>
-command! ExecCPP !./%:r
-nnoremap <Leader>ec :ExecCPP<CR>
 " macros for debugging in commonly used languages
 noremap <Leader>dj oi/* debug:start */i/* debug:stop */kA
 noremap <Leader>db oi# debug:start #i# debug:stop #kA
@@ -195,7 +190,7 @@ let g:WMGraphviz_output="png"
 let g:WMGraphviz_viewer="ristretto"
 
 " FuzzyFinder
-nnoremap <Leader>i :FufFile<CR>
+nnoremap <Leader>f :FufFile<CR>
 nnoremap <Leader>b :FufBuffer<CR>
 nnoremap <Leader>t :FufTag<CR>
 nnoremap <Leader>r :FufRenewCache<CR>
@@ -232,8 +227,8 @@ set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]
 "autocmd BufRead,BufNewFile /var/projects/v8/* set et ts=2 sw=2
 "autocmd BufRead,BufNewFile /var/projects/smbuffer/* set et ts=2 sw=2
 
-nnoremap <Leader>su :AABu<CR>
-nnoremap <Leader>sd :AABd<CR>
+nnoremap <Leader>iu :AABu<CR>
+nnoremap <Leader>id :AABd<CR>
 
 command! AABu execute ":normal!" AwesomeBlockBoundry(-1)."G"
 command! AABd execute ":normal!" AwesomeBlockBoundry(1)."G"
