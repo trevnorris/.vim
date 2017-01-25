@@ -146,7 +146,7 @@ nmap <Leader>R :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <Leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
 " remove everything between and including debug:start/debug:stop
-nnoremap <Leader>D :silent g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>
+nnoremap <Leader>D :silent g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>:noh<CR>
 
 " Generate ctags file in root of git repo from current directory
 nnoremap <Leader>ct :!ctags -f $(git rev-parse --show-cdup)/tags -R .<CR><CR>
@@ -227,8 +227,8 @@ set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]
 "autocmd BufRead,BufNewFile /var/projects/v8/* set et ts=2 sw=2
 "autocmd BufRead,BufNewFile /var/projects/smbuffer/* set et ts=2 sw=2
 
-nnoremap <Leader>iu :AABu<CR>
-nnoremap <Leader>id :AABd<CR>
+nnoremap <Leader>au :AABu<CR>
+nnoremap <Leader>ad :AABd<CR>
 
 command! AABu execute ":normal!" AwesomeBlockBoundry(-1)."G"
 command! AABd execute ":normal!" AwesomeBlockBoundry(1)."G"
