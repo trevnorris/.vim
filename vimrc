@@ -106,9 +106,9 @@ endif
 set foldenable                    " enable folding
 set foldlevel=99
 " for quick folding all top level functions
-:nmap <F6> :g/\v^}$/;norm zf%<CR>
+":nmap <F6> :g/\v^}$/;norm zf%<CR>
 " jump to end of line and fold
-:nmap <F5> $zf%
+":nmap <F5> $zf%
 
 " ADDITIONAL KEY MAPPINGS
 " swap implementations of ` and ' jump to prefer row and column jumping
@@ -132,12 +132,15 @@ nnoremap <Leader><Space> :noh<CR>
 " map Y to match C and D behavior
 nnoremap Y y$
 " fast window switching
-map <Leader>, <C-W>w
+nnoremap <Leader>/ <C-W>w
+nnoremap <Leader>. <C-W>W
 " cycle between buffers
-map <Leader>. :bn<CR>
-map <Leader>m :bp<CR>
+nnoremap <Leader>, :bn<CR>
+nnoremap <Leader>m :bp<CR>
 " change directory to current buffer
-map <Leader>cd :cd %:p:h<CR>
+nnoremap <Leader>cdd :cd %:p:h<CR>:pwd<CR>
+" change directory to git project root
+nnoremap <Leader>cdr :silent exec ':cd '.system('git rev-parse --show-cdup')<CR>:pwd<CR>
 " indent visual selected code without unselecting and going back to normal mode
 vmap > >gv
 vmap < <gv
@@ -147,9 +150,8 @@ nmap <Leader>R :%s#\<<C-r>=expand("<cword>")<CR>\>#
 nnoremap <Leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
 " remove everything between and including debug:start/debug:stop
 nnoremap <Leader>D :silent g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>:noh<CR>
-
-" Generate ctags file in root of git repo from current directory
-nnoremap <Leader>ct :!ctags -f $(git rev-parse --show-cdup)/tags -R .<CR><CR>
+" insert new line below current line from insert mode and start typing
+imap <C-]> <ESC>o
 
 " shift screen buffer up, down and side to side
 nnoremap <C-J> 3<C-E>
@@ -175,6 +177,11 @@ au FocusLost,BufLeave,WinLeave,TabLeave * silent! up
 " open in last edit place
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 
+"" quick save mksession in git repos
+command! -complete=file -nargs=1 Remove :echo 'Remove: '.'<f-args>'.' '.(delete(<f-args>) == 0 ? 'SUCCEEDED' : 'FAILED')
+noremap <Leader>kd :Remove .git/mksession.vim<CR>
+noremap <Leader>ks :mksession .git/mksession.vim<CR>
+noremap <Leader>kl :source .git/mksession.vim<CR>:so $MYVIMRC<CR>
 
 "" ABBREVIATIONS
 source $HOME/.vim/autocorrect.vim
@@ -185,15 +192,11 @@ source $HOME/.vim/autocorrect.vim
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 
-" WMGraphviz
-let g:WMGraphviz_output="png"
-let g:WMGraphviz_viewer="ristretto"
-
 " FuzzyFinder
-nnoremap <Leader>f :FufFile<CR>
-nnoremap <Leader>b :FufBuffer<CR>
-nnoremap <Leader>t :FufTag<CR>
-nnoremap <Leader>r :FufRenewCache<CR>
+nnoremap <Leader>zf :FufFile<CR>
+nnoremap <Leader>zb :FufBuffer<CR>
+nnoremap <Leader>zt :FufTag<CR>
+nnoremap <Leader>zr :FufRenewCache<CR>
 
 " Highligh all matching words under cursor
 au CursorMoved * silent! exe printf('match VisualNOS /\<%s\>/', expand('<cword>'))
@@ -208,6 +211,14 @@ au BufRead,BufNewFile *.gyp set ft=sh
 " HTML
 au FileType html,xhtml set formatoptions+=tl
 au FileType html,xhtml set smartindent
+
+" ale
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_enter = 0
+"let g:ale_lint_on_save = 0
+
+"nnoremap <leader>al :ALELint<CR>
+"nnoremap <leader>ar :ALEReset<CR>
 
 " Markdown
 "au FileType markdown set expandtab

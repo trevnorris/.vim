@@ -57,26 +57,29 @@ for r in ${tpope_repos[*]}; do
     get_repo "tpope" $repo
 done
 
+echo "Installing ALE"
+get_repo "w0rp" "ale"
+
 echo "Installing NerdCommenter"
 get_repo "scrooloose" "nerdcommenter"
 
 echo "Installing ColorSchemes"
 get_repo "flazz" "vim-colorschemes"
 
-echo "Installing xmledit"
-get_repo "sukima" "xmledit"
+#echo "Installing xmledit"
+#get_repo "sukima" "xmledit"
 
 echo "Installing javascript.vim"
 get_repo "trevnorris" "vim-javascript-syntax"
 
-echo "Installing Node dictionary"
-get_repo "guileen" "vim-node"
+#echo "Installing Node dictionary"
+#get_repo "guileen" "vim-node"
 
-echo "Installing vim-stylus"
-get_repo "wavded" "vim-stylus"
+#echo "Installing vim-stylus"
+#get_repo "wavded" "vim-stylus"
 
-echo "Installing jshint"
-get_repo "walm" "jshint.vim"
+#echo "Installing jshint"
+#get_repo "walm" "jshint.vim"
 
 #echo "Installing tern_for_vim"
 #get_repo "ternjs" "tern_for_vim"
@@ -84,20 +87,20 @@ get_repo "walm" "jshint.vim"
 echo "Installing tabular"
 get_repo "godlygeek" "tabular"
 
-echo "Installing vim-orgmode"
-get_repo "jceb" "vim-orgmode"
+#echo "Installing vim-orgmode"
+#get_repo "jceb" "vim-orgmode"
 
-echo "Installing WMGraphviz"
-get_repo "wannesm" "wmgraphviz.vim"
+#echo "Installing WMGraphviz"
+#get_repo "wannesm" "wmgraphviz.vim"
 
 echo "Installing L9"
-get_repo "clones" "vim-l9"
+get_repo "vim-scripts" "L9"
 
 echo "Installing FuzzyFinder"
-get_repo "clones" "vim-fuzzyfinder"
+get_repo "vim-scripts" "FuzzyFinder"
 
-echo "Installing Indent Guide"
-get_repo "nathanaelkane" "vim-indent-guides"
+#echo "Installing Indent Guide"
+#get_repo "nathanaelkane" "vim-indent-guides"
 
 echo "Installing vim-obsession"
 get_repo "tpope" "vim-obsession"
