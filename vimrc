@@ -89,7 +89,7 @@ if has("gui_running")
   "set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
   colorscheme ir_black
   set showtabline=2                 " prevent full screen display issues
-  set guifont=Droid\ Sans\ Mono\ 11,Liberation\ Mono\ 11,Monospace\ 10
+  set guifont=DejaVu\ Sans\ Mono\ Book\ 7,Liberation\ Mono\ 11,Monospace\ 10
 endif
 
 "" ADDITIONAL GUI SETTINGS
@@ -207,6 +207,7 @@ au CursorMoved * silent! exe printf('match VisualNOS /\<%s\>/', expand('<cword>'
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au BufRead,BufNewFile *.json set ft=javascript
 au BufRead,BufNewFile *.gyp set ft=sh
+au BufRead,BufNewFile *.gypi set ft=sh
 
 " HTML
 au FileType html,xhtml set formatoptions+=tl
