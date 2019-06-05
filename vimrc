@@ -265,7 +265,8 @@ nnoremap <Leader>xb :Bufreg
 command! -nargs=1 Bufreg call BufReg(<f-args>)
 function! BufReg(reg)
   cexpr []
-  bufdo silent execute 'vimgrepadd /'.a:reg.'/j '.expand('%:p')
+  silent bufdo exe 'vimgrepadd! /'.a:reg.'/j '.expand('%:p')
+  ":FufQuickfix
   botright cwindow
 endfunction
 
@@ -280,13 +281,15 @@ nnoremap <Leader>xr :Recreg
 command! -nargs=1 Recreg call RecReg(<f-args>)
 function! RecReg(reg)
   silent execute 'vimgrep /'.a:reg.'/j '.getcwd().'/**/*'
-  botright cwindow
+  :FufQuickfix
+  "botright cwindow
 endfunction
 
 nnoremap <Leader>xw :call WordReg(expand("<cword>"))<CR>
 function! WordReg(reg)
   silent execute 'vimgrep /\<'.a:reg.'\>/j '.getcwd().'/**/*'
-  botright cwindow
+  :FufQuickfix
+  "botright cwindow
 endfunction
 
 nnoremap <Leader>xc :Custreg 
@@ -294,7 +297,8 @@ command! -nargs=1 Custreg call CustReg(<f-args>)
 function! CustReg(reg)
   cexpr []
   bufdo silent execute 'vimgrepadd '.a:reg
-  botright cwindow
+  :FufQuickfix
+  "botright cwindow
 endfunction
 
 

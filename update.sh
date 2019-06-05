@@ -57,8 +57,8 @@ for r in ${tpope_repos[*]}; do
     get_repo "tpope" $repo
 done
 
-echo "Installing ALE"
-get_repo "w0rp" "ale"
+#echo "Installing ALE"
+#get_repo "w0rp" "ale"
 
 echo "Installing NerdCommenter"
 get_repo "scrooloose" "nerdcommenter"
@@ -104,6 +104,9 @@ get_repo "vim-scripts" "FuzzyFinder"
 
 echo "Installing vim-obsession"
 get_repo "tpope" "vim-obsession"
+
+echo "Installing QFEnter"
+get_repo "yssl" "QFEnter"
 
 #echo "Installing YouCompleteMe"
 #get_repo "Valloric" "YouCompleteMe"
