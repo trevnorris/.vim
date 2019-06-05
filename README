@@ -1,9 +1,9 @@
-This is the current state of my .vim folder.
+This is my .vim folder
 
-To install: download archive, run make (it will back up your current .vim, .vimrc, and .gvimrc)
+It uses Vundle to manage plugins.
 
-To update: to updates plugins run .vim/update.sh
+Remember to run :PluginInstall the first time and :PluginUpdate once in a while.
+Can also run this the first time:
 
-Originally forked from https://github.com/isaacs/.vim
+$ vim +PluginInstall +qall
 
-Note: If you have a Mac, you need a terminal that supports more colors like iTerm.

@@ -1,11 +1,41 @@
 " FULL VIM
 set nocompatible
 
-" PATHOGEN
+" VUNDLE
 filetype off
-silent! call pathogen#helptags()
-silent! call pathogen#infect()
-filetype plugin indent on
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'flazz/vim-colorschemes'
+Plugin 'godlygeek/tabular'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-abolish'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'trevnorris/vim-javascript-syntax'
+Plugin 'vim-scripts/FuzzyFinder'
+Plugin 'vim-scripts/L9'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'yssl/QFEnter'
+
+" Have used, but not currently using
+"Plugin 'guileen/vim-node'
+"Plugin 'jceb/vim-orgmode'
+"Plugin 'marijnh/tern_for_vim'
+"Plugin 'nathanaelkane/vim-indent-guides'
+"Plugin 'ternjs/tern_for_vim'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'w0rp/ale'
+"Plugin 'walm/jshint.vim'
+"Plugin 'wannesm/wmgraphviz.vim'
+"Plugin 'wavded/vim-stylus'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " MAP <Leader>
 " NOTE: if there is delay in a key combo use :verbose noremap <leader>(key) to
@@ -148,10 +178,11 @@ vmap < <gv
 nmap <Leader>R :%s#\<<C-r>=expand("<cword>")<CR>\>#
 " strip all trailing whitespace in the current file
 nnoremap <Leader>W :%s/\s\+$//e<CR>:let @/=''<CR>
-" remove everything between and including debug:start/debug:stop
-nnoremap <Leader>D :silent g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>:noh<CR>
 " insert new line below current line from insert mode and start typing
 imap <C-]> <ESC>o
+" Quick jump to quickfix window
+nnoremap <Leader>co :copen<CR>
+nnoremap <Leader>cl :ccl<CR>
 
 " shift screen buffer up, down and side to side
 nnoremap <C-J> 3<C-E>
@@ -163,6 +194,8 @@ nnoremap <C-H> 3zh
 nnoremap k gk
 nnoremap j gj
 
+" remove everything between and including debug:start/debug:stop
+nnoremap <Leader>D :silent g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>:noh<CR>
 " macros for debugging in commonly used languages
 noremap <Leader>dj oi/* debug:start */i/* debug:stop */kA
 noremap <Leader>db oi# debug:start #i# debug:stop #kA
@@ -183,9 +216,6 @@ noremap <Leader>kd :Remove .git/mksession.vim<CR>
 noremap <Leader>ks :mksession .git/mksession.vim<CR>
 noremap <Leader>kl :source .git/mksession.vim<CR>:so $MYVIMRC<CR>
 
-"" ABBREVIATIONS
-source $HOME/.vim/autocorrect.vim
-
 "" PLUGIN SETTINGS
 
 " Indent Guide
@@ -199,7 +229,7 @@ nnoremap <Leader>zt :FufTag<CR>
 nnoremap <Leader>zr :FufRenewCache<CR>
 
 " Highligh all matching words under cursor
-au CursorMoved * silent! exe printf('match VisualNOS /\<%s\>/', expand('<cword>'))
+au CursorMoved * silent! exe 'match VisualNOS /'.escape(expand('<cword>'), '.*').'/'
 
 "" LANGUAGE SPECIFIC
 
@@ -217,27 +247,12 @@ au FileType html,xhtml set smartindent
 "let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_enter = 0
 "let g:ale_lint_on_save = 0
-
 "nnoremap <leader>al :ALELint<CR>
 "nnoremap <leader>ar :ALEReset<CR>
 
-" Markdown
-"au FileType markdown set expandtab
-
-"" STATUS LINE
+" STATUS LINE
 set laststatus=2 " always hide the statusline
 set statusline=%f%m%r%h%w\ [TYPE=%Y][LEN=%L][ROW=%04l,COL=%04v][%P]%=[FF=%{&ff}]%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k
-
-" highlight ExtraWhitespace ctermbg=red guibg=red
-" autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
-
-
-" Path options
-"autocmd BufRead,BufNewFile /var/projects/node/* set et ts=2 sw=2
-"autocmd BufRead,BufNewFile /var/projects/node-trevnorris/* set et ts=2 sw=2
-"autocmd BufRead,BufNewFile /var/projects/node-timer/* set et ts=2 sw=2
-"autocmd BufRead,BufNewFile /var/projects/v8/* set et ts=2 sw=2
-"autocmd BufRead,BufNewFile /var/projects/smbuffer/* set et ts=2 sw=2
 
 nnoremap <Leader>au :AABu<CR>
 nnoremap <Leader>ad :AABd<CR>
@@ -261,50 +276,64 @@ function! AwesomeBlockBoundry(direction)
   return next_line
 endfunction
 
+" Search all buffers for matches
 nnoremap <Leader>xb :Bufreg 
 command! -nargs=1 Bufreg call BufReg(<f-args>)
 function! BufReg(reg)
+  let buf=bufnr('%')
   cexpr []
-  silent bufdo exe 'vimgrepadd! /'.a:reg.'/j '.expand('%:p')
-  ":FufQuickfix
+  silent! bufdo exe 'vimgrepadd /'.a:reg.'/j '.expand('%:p')
+  exec 'b' buf
   botright cwindow
 endfunction
 
+" Search current director for matches
 nnoremap <Leader>xd :Dirreg 
 command! -nargs=1 Dirreg call DirReg(<f-args>)
 function! DirReg(reg)
-  silent execute 'vimgrep /'.a:reg.'/j '.expand('%:p:h').'/*'
+  let buf=bufnr('%')
+  silent! execute 'vimgrep /'.a:reg.'/j '.expand('%:p:h').'/*'
+  exec 'b' buf
   botright cwindow
 endfunction
 
+" Search current directory and all subdirectories for matches
 nnoremap <Leader>xr :Recreg 
 command! -nargs=1 Recreg call RecReg(<f-args>)
 function! RecReg(reg)
-  silent execute 'vimgrep /'.a:reg.'/j '.getcwd().'/**/*'
-  :FufQuickfix
-  "botright cwindow
+  let buf=bufnr('%')
+  silent! execute 'vimgrep /'.a:reg.'/j '.getcwd().'/**/*'
+  exec 'b' buf
+  botright cwindow
 endfunction
 
-nnoremap <Leader>xw :call WordReg(expand("<cword>"))<CR>
+" Search for word under cursor in current buffers
+nnoremap <Leader>xwb :call WordReg(expand("<cword>"))<CR>
 function! WordReg(reg)
-  silent execute 'vimgrep /\<'.a:reg.'\>/j '.getcwd().'/**/*'
-  :FufQuickfix
-  "botright cwindow
-endfunction
-
-nnoremap <Leader>xc :Custreg 
-command! -nargs=1 Custreg call CustReg(<f-args>)
-function! CustReg(reg)
+  let buf=bufnr('%')
   cexpr []
-  bufdo silent execute 'vimgrepadd '.a:reg
-  :FufQuickfix
-  "botright cwindow
+  silent! bufdo exe 'vimgrepadd /\<'.a:reg.'\>/j '.expand('%:p')
+  exec 'b' buf
+  botright cwindow
+endfunction
+
+" Search for word under cursor in current directory
+nnoremap <Leader>xwb :call WordReg(expand("<cword>"))<CR>
+function! WordReg(reg)
+  let buf=bufnr('%')
+  cexpr []
+  silent! bufdo exe 'vimgrepadd /\<'.a:reg.'\>/j '.expand('%:p:h').'/*'
+  exec 'b' buf
+  botright cwindow
 endfunction
 
 
+" Used to autofix syntax highlighting after doing :bufdo e!
+" but should be able to restore highlighting with :syntax on
 " Enable syntax highlighting when buffers are displayed in a window through
 " :argdo and :bufdo, which disable the Syntax autocmd event to speed up
 " processing.
+
 augroup EnableSyntaxHighlighting
     " Filetype processing does happen, so we can detect a buffer initially
     " loaded during :argdo / :bufdo through a set filetype, but missing
@@ -327,6 +356,7 @@ augroup EnableSyntaxHighlighting
     " Note: Must allow nesting of autocmds so that the :syntax enable triggers
     " the ColorScheme event. Otherwise, some highlighting groups may not be
     " restored properly.
+
     autocmd! BufWinEnter,WinEnter * nested if exists('syntax_on') && ! exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') == -1 | silent syntax enable | endif
 
     " The above does not handle reloading via :bufdo edit!, because the
@@ -336,5 +366,6 @@ augroup EnableSyntaxHighlighting
     " 'eventignore', an immediate :syntax enable is ignored, but by clearing
     " b:current_syntax, the above handler will do this when the reloaded buffer
     " is displayed in a window again.
+
     autocmd! BufRead * if exists('syntax_on') && exists('b:current_syntax') && ! empty(&l:filetype) && index(split(&eventignore, ','), 'Syntax') != -1 | unlet! b:current_syntax | endif
 augroup END
