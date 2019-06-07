@@ -229,7 +229,7 @@ nnoremap <Leader>zt :FufTag<CR>
 nnoremap <Leader>zr :FufRenewCache<CR>
 
 " Highligh all matching words under cursor
-au CursorMoved * silent! exe 'match VisualNOS /'.escape(expand('<cword>'), '.*').'/'
+au CursorMoved * silent! exe 'match VisualNOS /\<'.escape(expand('<cword>'), '\*').'\>/'
 
 "" LANGUAGE SPECIFIC
 
