@@ -33,6 +33,9 @@ Plugin 'yssl/QFEnter'
 "Plugin 'wannesm/wmgraphviz.vim'
 "Plugin 'wavded/vim-stylus'
 
+set mouse=
+set ttymouse=
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -111,10 +114,11 @@ if v:version >= 703
 endif
 
 " COLOR SCHEME
-set t_Co=256
+"set t_Co=256
 set background=dark
 colorscheme distinguished
 set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
+highlight ColorColumn ctermbg=0
 if has("gui_running")
   "set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
   colorscheme ir_black
@@ -153,7 +157,7 @@ vnoremap <C-Space> <ESC>
 vnoremap <Nul> <ESC>
 " fast saving
 nnoremap <Leader>s :up<CR>
-inoremap <F2> <C-o>:w<cr>
+"inoremap <F2> <C-o>:w<cr>
 " prevent accidental striking of F1 key
 map <F1> <ESC>
 imap <F1> <ESC>
@@ -193,6 +197,10 @@ nnoremap <C-H> 3zh
 " easier movement when text lines wrap
 nnoremap k gk
 nnoremap j gj
+
+" move to next line that has a line that has no whitespace at beginning
+"nnoremap <C-I> ?\_^\n^\S<CR>
+"nnoremap <C-U> :set hls!<CR>/\_^\n^\S<CR>:noh<CR>j
 
 " remove everything between and including debug:start/debug:stop
 nnoremap <Leader>D :silent g/^\/\* debug:start \*\//;/^\/\* debug:stop \*\//d<CR>:noh<CR>
@@ -242,6 +250,9 @@ au BufRead,BufNewFile *.gypi set ft=sh
 " HTML
 au FileType html,xhtml set formatoptions+=tl
 au FileType html,xhtml set smartindent
+
+" Makefile
+autocmd FileType make set noexpandtab shiftwidth=8 tabstop=8 softtabstop=0
 
 " ale
 "let g:ale_lint_on_text_changed = 'never'
@@ -318,14 +329,14 @@ function! WordReg(reg)
 endfunction
 
 " Search for word under cursor in current directory
-nnoremap <Leader>xwb :call WordReg(expand("<cword>"))<CR>
-function! WordReg(reg)
-  let buf=bufnr('%')
-  cexpr []
-  silent! bufdo exe 'vimgrepadd /\<'.a:reg.'\>/j '.expand('%:p:h').'/*'
-  exec 'b' buf
-  botright cwindow
-endfunction
+"nnoremap <Leader>xwb :call WordReg(expand("<cword>"))<CR>
+"function! WordReg(reg)
+"  let buf=bufnr('%')
+"  cexpr []
+"  silent! bufdo exe 'vimgrepadd /\<'.a:reg.'\>/j '.expand('%:p:h').'/*'
+"  exec 'b' buf
+"  botright cwindow
+"endfunction
 
 
 " Used to autofix syntax highlighting after doing :bufdo e!
