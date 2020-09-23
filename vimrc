@@ -20,6 +20,7 @@ Plugin 'vim-scripts/FuzzyFinder'
 Plugin 'vim-scripts/L9'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'yssl/QFEnter'
+Plugin 'jacoborus/tender.vim'
 
 " Have used, but not currently using
 "Plugin 'guileen/vim-node'
@@ -105,29 +106,25 @@ set scrolloff=3                     " force lines on top and bottom
 
 syntax enable                       " enable syntax highlighting
 
-" VIM 7.3 FEATURES
-
-if v:version >= 703
-  set undofile
-  set undodir=$HOME/.vim/.undo
-  set colorcolumn=81                " try to keep lines <= 80 characters
-endif
-
 " COLOR SCHEME
-"set t_Co=256
-set background=dark
 colorscheme distinguished
-set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
+"colorscheme tender
+
+set t_Co=256
+set background=dark
+set colorcolumn=81
+"set fillchars+=vert:\│
+
 highlight ColorColumn ctermbg=0
-if has("gui_running")
-  "set list listchars=tab:\⁚\ ,trail:· " draw tab lines automatically
-  colorscheme ir_black
-  set showtabline=2                 " prevent full screen display issues
-  set guifont=DejaVu\ Sans\ Mono\ Book\ 7,Liberation\ Mono\ 11,Monospace\ 10
-endif
+highlight StatusLine ctermbg=88
+highlight StatusLineNC ctermbg=52
+highlight VertSplit ctermbg=52
 
 "" ADDITIONAL GUI SETTINGS
 if has("gui_running")
+  colorscheme ir_black
+  set showtabline=2                 " prevent full screen display issues
+  set guifont=DejaVu\ Sans\ Mono\ Book\ 7,Liberation\ Mono\ 11,Monospace\ 10
   set guioptions-=T
   set columns=130 lines=45
   set guioptions-=T
@@ -139,10 +136,14 @@ endif
 " FOLDING
 set foldenable                    " enable folding
 set foldlevel=99
+" skip around fold blocks
+set foldopen-=block
 " for quick folding all top level functions
 ":nmap <F6> :g/\v^}$/;norm zf%<CR>
 " jump to end of line and fold
 ":nmap <F5> $zf%
+" Fold single top level function
+nnoremap <Leader>F :/^}/<CR>:norm zf%<CR>:noh<CR>
 
 " ADDITIONAL KEY MAPPINGS
 " swap implementations of ` and ' jump to prefer row and column jumping
@@ -189,8 +190,8 @@ nnoremap <Leader>co :copen<CR>
 nnoremap <Leader>cl :ccl<CR>
 
 " shift screen buffer up, down and side to side
-nnoremap <C-J> 3<C-E>
-nnoremap <C-K> 3<C-Y>
+nnoremap <C-J> 6<C-E>
+nnoremap <C-K> 6<C-Y>
 nnoremap <C-L> 3zl
 nnoremap <C-H> 3zh
 
@@ -288,7 +289,7 @@ function! AwesomeBlockBoundry(direction)
 endfunction
 
 " Search all buffers for matches
-nnoremap <Leader>xb :Bufreg 
+nnoremap <Leader>xb :Bufreg
 command! -nargs=1 Bufreg call BufReg(<f-args>)
 function! BufReg(reg)
   let buf=bufnr('%')
@@ -299,7 +300,7 @@ function! BufReg(reg)
 endfunction
 
 " Search current director for matches
-nnoremap <Leader>xd :Dirreg 
+nnoremap <Leader>xd :Dirreg
 command! -nargs=1 Dirreg call DirReg(<f-args>)
 function! DirReg(reg)
   let buf=bufnr('%')
@@ -309,7 +310,7 @@ function! DirReg(reg)
 endfunction
 
 " Search current directory and all subdirectories for matches
-nnoremap <Leader>xr :Recreg 
+nnoremap <Leader>xr :Recreg
 command! -nargs=1 Recreg call RecReg(<f-args>)
 function! RecReg(reg)
   let buf=bufnr('%')
